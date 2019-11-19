@@ -61,6 +61,16 @@
        <string>noRang</string>
       </property>
      </column>
+     <column>
+      <property name="text">
+       <string>dateEmTick</string>
+      </property>
+     </column>
+     <column>
+      <property name="text">
+       <string>noDos</string>
+      </property>
+     </column>
     </widget>
    </item>
    <item>

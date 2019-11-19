@@ -56,5 +56,13 @@ create table LesDossiers_base (
 );
 
 -- TODO 1.2 : ajouter la définition de la vue LesRepresentations
+CREATE VIEW LesRepresentations
+AS
+with s1 as (select count(*) taken,nospec,LesRepresentations_base.daterep date ,LesRepresentations_base.promorep
+FROM
+LesTickets NATURAL join LesRepresentations_base
+GROUP by date,noSpec,promorep)
+select  nospec,date,promorep,((select count(*) n from LesPlaces) - s1.taken) n from s1;
+
 -- TODO 1.3 : ajouter la table LesCategoriesTickets
 -- TODO 1.4 : ajouter la définition de la vue LesDossiers
