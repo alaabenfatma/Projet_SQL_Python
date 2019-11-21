@@ -51,3 +51,6 @@ insert into LesTickets(noSpec, dateRep, noPlace, noRang, dateEmTick, noDos) valu
 
 insert into LesTickets(noSpec, dateRep, noPlace, noRang, dateEmTick, noDos) values (2, '25/12/2019 23:00', 1, 3, '20/12/2019 14:22:00',3);
 insert into LesTickets(noSpec, dateRep, noPlace, noRang, dateEmTick, noDos) values (2, '25/12/2019 23:00', 2, 3, '20/12/2019 14:22:00',3);
+
+--insert into LesCategoriesTickets(libelleCat, tauxReductionCat) values ("normal", 0);
+--insert into LesCategoriesTickets(libelleCat, tauxReductionCat) values ("etudiant", 1);

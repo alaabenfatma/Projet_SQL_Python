@@ -58,11 +58,20 @@ create table LesDossiers_base (
 -- TODO 1.2 : ajouter la définition de la vue LesRepresentations
 CREATE VIEW LesRepresentations
 AS
-with s1 as (select count(*) taken,nospec,LesRepresentations_base.daterep date ,LesRepresentations_base.promorep
+with s1 as (select count(noplace) taken,LesRepresentations_base.nospec,LesRepresentations_base.daterep d ,LesRepresentations_base.promorep
 FROM
-LesTickets NATURAL join LesRepresentations_base
-GROUP by date,noSpec,promorep)
-select  nospec,date,promorep,((select count(*) n from LesPlaces) - s1.taken) n from s1;
+LesRepresentations_base  left outer join  LesTickets on ( LesRepresentations_base.daterep=LesTickets.dateRep)
+GROUP by d,LesRepresentations_base.noSpec,promorep)
+select  s1.nospec,d dateRep,promorep,((select count(*) n from LesPlaces) - s1.taken) PlacesDispo from s1;
 
 -- TODO 1.3 : ajouter la table LesCategoriesTickets
+
+CREATE table LesCategoriesTickets (
+    libelleCat varchar(15),
+    tauxReductionCat integer,
+    constraint pk_lib primary key (libelleCat),
+    constraint ck_lib check (libelleCat in ("normal", "adh́erent","senior",  "etudiant" ,  "militaire")),
+    constraint ck_tr check(tauxReductionCat>-1 AND tauxReductionCat<2)
+);
+
 -- TODO 1.4 : ajouter la définition de la vue LesDossiers

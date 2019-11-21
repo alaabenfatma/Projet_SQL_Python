@@ -29,7 +29,7 @@
    <item>
     <widget class="QTabWidget" name="tabWidget">
      <property name="currentIndex">
-      <number>0</number>
+      <number>1</number>
      </property>
      <widget class="QWidget" name="tabSpectacles">
       <attribute name="title">
@@ -166,7 +166,7 @@
           <enum>Qt::LeftToRight</enum>
          </property>
          <property name="columnCount">
-          <number>3</number>
+          <number>4</number>
          </property>
          <attribute name="horizontalHeaderCascadingSectionResizes">
           <bool>true</bool>
@@ -199,6 +199,11 @@
          <column>
           <property name="text">
            <string>promoRep</string>
+          </property>
+         </column>
+         <column>
+          <property name="text">
+           <string>PlacesDispo</string>
           </property>
          </column>
         </widget>

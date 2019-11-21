@@ -7,3 +7,4 @@ DROP TABLE IF EXISTS LesSpectacles;
 DROP TABLE IF EXISTS LesTickets;
 DROP TABLE IF EXISTS LesZones;
 DROP VIEW IF EXISTS LesRepresentations;
+DROP TABLE IF EXISTS LesCategoriesTickets;
