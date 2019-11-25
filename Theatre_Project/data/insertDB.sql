@@ -40,7 +40,7 @@ insert into LesRepresentations_base(noSpec, dateRep, promoRep) values (2, '24/12
 insert into LesRepresentations_base(noSpec, dateRep, promoRep) values (2, '25/12/2019 23:00', 0.5);
 
 insert into LesCategoriesTickets(libelleCat, tauxReductionCat) values ('normal', 1);
-insert into LesCategoriesTickets(libelleCat, tauxReductionCat) values ('adherent', 0.85);
+insert into LesCategoriesTickets(libelleCat, tauxReductionCat) values ('adhérent', 0.85);
 insert into LesCategoriesTickets(libelleCat, tauxReductionCat) values ('senior',0.75);
 insert into LesCategoriesTickets(libelleCat, tauxReductionCat) values ('etudiant',0.5);
 insert into LesCategoriesTickets(libelleCat, tauxReductionCat) values ('militaire',0.75);

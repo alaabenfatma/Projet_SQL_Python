@@ -70,7 +70,7 @@ CREATE table LesCategoriesTickets (
     libelleCat varchar(15),
     tauxReductionCat integer,
     constraint pk_lib primary key (libelleCat),
-    constraint ck_lib check (libelleCat in ("normal", "adh́erent","senior",  "etudiant" ,  "militaire")),
+    constraint ck_lib check (libelleCat in ("normal", "adhérent","senior",  "etudiant" ,  "militaire")),
     constraint ck_tr check(tauxReductionCat>-1 AND tauxReductionCat<2)
 );
 
