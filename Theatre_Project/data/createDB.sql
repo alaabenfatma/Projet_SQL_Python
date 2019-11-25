@@ -65,15 +65,33 @@ create table LesDossiers_base (
 );
 
 -- TODO 1.2 : ajouter la définition de la vue LesRepresentations
-CREATE VIEW LesRepresentations
-AS
-with s1 as (select count(noplace) taken,LesRepresentations_base.nospec,LesRepresentations_base.daterep d ,LesRepresentations_base.promorep
-FROM
-LesRepresentations_base  left outer join  LesTickets on ( LesRepresentations_base.daterep=LesTickets.dateRep)
-GROUP by d,LesRepresentations_base.noSpec,promorep)
-select  s1.nospec,d dateRep,promorep,((select count(*) n from LesPlaces) - s1.taken) PlacesDispo from s1;
+
+CREATE VIEW lesrepresentations AS WITH s1 AS
+  (SELECT Count(noplace) taken,
+          lesrepresentations_base.nospec,
+          lesrepresentations_base.daterep d,
+          lesrepresentations_base.promorep
+   FROM lesrepresentations_base
+   LEFT OUTER JOIN lestickets ON (lesrepresentations_base.daterep = lestickets.daterep) 
+   GROUP  BY d,
+                lesrepresentations_base.nospec,
+                promorep)
+SELECT s1.nospec,
+       d dateRep,
+       promorep,
+       ((SELECT Count(*) n FROM lesplaces) - s1.taken) PlacesDispo
+FROM s1;
 
 -- TODO 1.3 : ajouter la table LesCategoriesTickets
-
-
+-- LOOK ABOVE.
 -- TODO 1.4 : ajouter la définition de la vue LesDossiers
+
+CREATE VIEW lesdossiers AS
+SELECT nodos,
+       Sum(prixbasespec * promorep * tauxreductioncat) montant
+FROM lesdossiers_base
+NATURAL JOIN lesrepresentations_base
+NATURAL JOIN lestickets
+NATURAL JOIN lesspectacles
+NATURAL JOIN lescategoriestickets 
+GROUP  BY nodos;
