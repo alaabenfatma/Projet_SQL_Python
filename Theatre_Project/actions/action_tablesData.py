@@ -45,6 +45,6 @@ class AppTablesData(QDialog):
         self.refreshTable(self.ui.label_places, self.ui.tablePlaces, "SELECT noPlace, noRang, noZone FROM LesPlaces")
         # TODO 1.4 : modifier pour afficher les éléments de la vue LesDossiers
         self.refreshTable(self.ui.label_dossiers, self.ui.tableDossiers, "SELECT noDos FROM LesDossiers_base")
-        self.refreshTable(self.ui.label_tickets, self.ui.tableTickets, "SELECT noSpec, dateRep, noPlace, noRang, dateEmTick, noDos FROM LesTickets")
+        self.refreshTable(self.ui.label_tickets, self.ui.tableTickets, "SELECT noSpec, dateRep, noPlace, noRang,libelleCat, dateEmTick, noDos FROM LesTickets")
         # TODO 1.3 : vérifier le bon fonctionnement de la requête pour afficher le contenu de la table LesCategoriesTickets
         self.refreshTable(self.ui.label_categories, self.ui.tableCategories, "SELECT libelleCat, tauxReductionCat FROM LesCategoriesTickets")

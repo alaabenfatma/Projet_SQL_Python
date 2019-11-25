@@ -7,8 +7,16 @@ create table LesZones (
     constraint ck_zon_tauxZone check (tauxZone >= 0),
     constraint ck_zon_cat check (catZone in ('orchestre', 'balcon', 'poulailler'))
 );
+CREATE table LesCategoriesTickets (
+    libelleCat varchar(15),
+    tauxReductionCat integer,
+    constraint pk_lib primary key (libelleCat),
+    constraint ck_lib check (libelleCat in ("normal", "adhérent","senior",  "etudiant" ,  "militaire")),
+    constraint ck_tr check(tauxReductionCat>-1 AND tauxReductionCat<2)
+);
 
 create table LesTickets (
+    libelleCat varchar(50),
     noSpec integer,
     dateRep date,
     noPlace integer,
@@ -19,6 +27,7 @@ create table LesTickets (
     constraint fk_tck_numS_dateR foreign key (noSpec, dateRep) references LesRepresentations_base(noSpec, dateRep),
     constraint fk_tck_noP_noR foreign key (noPlace, noRang) references LesPlaces (noPlace,noRang),
     constraint fk_tck_noD foreign key (noDos) references LesDossiers_base (noDos),
+    constraint fk_tck_lib foreign key (libelleCat) references LesCategoriesTickets (libelleCat),
     constraint ck_dates check (dateEmTick < dateRep)
 );
 
@@ -66,12 +75,5 @@ select  s1.nospec,d dateRep,promorep,((select count(*) n from LesPlaces) - s1.ta
 
 -- TODO 1.3 : ajouter la table LesCategoriesTickets
 
-CREATE table LesCategoriesTickets (
-    libelleCat varchar(15),
-    tauxReductionCat integer,
-    constraint pk_lib primary key (libelleCat),
-    constraint ck_lib check (libelleCat in ("normal", "adhérent","senior",  "etudiant" ,  "militaire")),
-    constraint ck_tr check(tauxReductionCat>-1 AND tauxReductionCat<2)
-);
 
 -- TODO 1.4 : ajouter la définition de la vue LesDossiers

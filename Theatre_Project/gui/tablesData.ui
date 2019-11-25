@@ -29,7 +29,7 @@
    <item>
     <widget class="QTabWidget" name="tabWidget">
      <property name="currentIndex">
-      <number>1</number>
+      <number>5</number>
      </property>
      <widget class="QWidget" name="tabSpectacles">
       <attribute name="title">
@@ -560,6 +560,11 @@
          <column>
           <property name="text">
            <string>noRang</string>
+          </property>
+         </column>
+         <column>
+          <property name="text">
+           <string>libelleCat</string>
           </property>
          </column>
          <column>
