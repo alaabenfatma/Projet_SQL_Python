@@ -17,7 +17,15 @@ class AppFctComp4(QDialog):
         for row in self.cursor.execute("SELECT count(*) FROM LesDossiers"):
             self.ui.spinBox_fct_4_dossier.setMaximum(row[0])
         self.refreshCatList()
-
+        self.ui.spinBox_fct_4_dossier.valueChanged.connect(self.get_corresponding_zones)
+    def get_corresponding_zones(self,value):
+        self.ui.comboBox_4_categorie.clear()
+        cursor = self.data.cursor()
+        
+        for row in self.cursor.execute("SELECT catZone FROM LesZones NATURAL JOIN LesDossiers WHERE noDos = ?", [value]):
+            self.ui.comboBox_4_categorie.addItem(row[0])
+            print(row[0])
+        print(value)
     # Fonction de mise à jour de l'affichage
     def refreshResult(self):
         # TODO 1.7 : fonction à modifier pour que le numéro de dossier ne puisse être choisi que parmi ceux présents dans la base et que la catégorie ne propose que des valeurs possibles pour le dossier choisi, une fois le fichier ui correspondant mis à jour
@@ -39,7 +47,7 @@ class AppFctComp4(QDialog):
     # Fonction de mise à jour des catégories
     @pyqtSlot()
     def refreshCatList(self):
-
+        print("here")
         try:
             cursor = self.data.cursor()
             result = cursor.execute("SELECT catZone FROM LesZones")
