@@ -88,10 +88,12 @@ FROM s1;
 
 CREATE VIEW lesdossiers AS
 SELECT nodos,
-       Sum(prixbasespec * promorep * tauxreductioncat) montant
+       Sum(prixbasespec * promorep * tauxreductioncat * tauxZone) montant
 FROM lesdossiers_base
 NATURAL JOIN lesrepresentations_base
 NATURAL JOIN lestickets
 NATURAL JOIN lesspectacles
 NATURAL JOIN lescategoriestickets 
+NATURAL JOIN LesPlaces
+NATURAL JOIN LesZones
 GROUP  BY nodos;
