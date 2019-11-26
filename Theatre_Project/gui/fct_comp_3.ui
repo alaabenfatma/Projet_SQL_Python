@@ -37,7 +37,7 @@
       </widget>
      </item>
      <item>
-      <widget class="QLineEdit" name="lineEdit_fct_comp_3"/>
+      <widget class="QComboBox" name="combo_sql_cat"/>
      </item>
      <item>
       <widget class="QPushButton" name="pushButton">
