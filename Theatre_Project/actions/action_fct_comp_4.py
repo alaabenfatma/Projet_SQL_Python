@@ -17,7 +17,7 @@ class AppFctComp4(QDialog):
         for row in self.cursor.execute("SELECT count(*) FROM LesDossiers"):
             self.ui.spinBox_fct_4_dossier.setMaximum(row[0])
         self.refreshCatList()
-        self.ui.spinBox_fct_4_dossier.valueChanged.connect(self.get_corresponding_zones)
+        self.ui.spinBox_fct_4_dossier.valueChanged.connect(self.refreshCatList)
     def get_corresponding_zones(self,value):
         self.ui.comboBox_4_categorie.clear()
         cursor = self.data.cursor()
@@ -47,10 +47,9 @@ class AppFctComp4(QDialog):
     # Fonction de mise à jour des catégories
     @pyqtSlot()
     def refreshCatList(self):
-        print("here")
         try:
             cursor = self.data.cursor()
-            result = cursor.execute("SELECT catZone FROM LesZones")
+            result = cursor.execute('with s as(SELECT * FROM LesTickets NATURAL JOIN LesPlaces) select distinct catzone from s join LesZones USING(nozone) where nodos=?',[self.ui.spinBox_fct_4_dossier.text().strip()])
         except Exception as e:
             self.ui.comboBox_4_categorie.clear()
         else:
