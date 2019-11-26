@@ -13,6 +13,9 @@ class AppFctComp4(QDialog):
         super(QDialog, self).__init__()
         self.ui = uic.loadUi("gui/fct_comp_4.ui", self)
         self.data = data
+        self.cursor = self.data.cursor()
+        for row in self.cursor.execute("SELECT count(*) FROM LesDossiers"):
+            self.ui.spinBox_fct_4_dossier.setMaximum(row[0])
         self.refreshCatList()
 
     # Fonction de mise à jour de l'affichage
