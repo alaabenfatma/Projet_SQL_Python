@@ -20,18 +20,22 @@ class AppFctComp3(QDialog):
     @pyqtSlot()
     def refreshResult(self):
         # TODO 1.6 : fonction à modifier pour remplacer la zone de saisie par une liste de valeurs issues de la BD une fois le fichier ui correspondant mis à jour
-        
-       # display.refreshLabel(self.ui.combo_sql_cat, "")
+        index = self.ui.combo_sql_cat.currentIndex()
+        self.ui.combo_sql_cat.clear()
+        for row in self.cursor.execute('SELECT catZone FROM LesZones'):
+            self.ui.combo_sql_cat.addItem(row[0])
+        self.ui.combo_sql_cat.setCurrentIndex(index)
         if not self.ui.combo_sql_cat.currentText():
             self.ui.table_fct_comp_3.setRowCount(0)
-           # display.refreshLabel(self.ui.combo_sql_cat.currentText(), "Veuillez indiquer un nom de catégorie")
+            display.refreshLabel(self.ui.label_fct_comp_3, "Veuillez indiquer un nom de catégorie")
         else:
             try:
                 cursor = self.data.cursor()
+                self.cat  =self.ui.combo_sql_cat.itemText(index)
                 result = cursor.execute(
                     "SELECT noPlace, noRang, noZone FROM LesZones NATURAL JOIN LesPlaces WHERE catZone = ?",
-                    [self.ui.combo_sql_cat.currentText()])
-               
+                    [self.cat])
+                print(self.cat)
             except Exception as e:
                 self.ui.table_fct_comp_3.setRowCount(0)
                 display.refreshLabel(self.ui.label_fct_comp_3, "Impossible d'afficher les résultats : " + repr(e))
