@@ -11,13 +11,13 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>Modifier les répresentations</string>
+   <string>Modifier les spectacles</string>
   </property>
   <layout class="QVBoxLayout" name="verticalLayout">
    <item>
     <widget class="QLabel" name="label">
      <property name="text">
-      <string>Representations actuelles :</string>
+      <string>Spectacles actuels :</string>
      </property>
     </widget>
    </item>
