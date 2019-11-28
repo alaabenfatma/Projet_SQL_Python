@@ -14,6 +14,8 @@ from actions.action_fct_comp_3 import AppFctComp3
 from actions.action_fct_comp_4 import AppFctComp4
 from actions.action_rep_libre_2_1 import AppRepLibre
 from actions.action_spectacle import AppSpectacle
+from actions.action_main_spec_rep import AppMainSpecRep
+
 # Classe utilisée pour lancer la fenêtre principale de l'application et définir ses actions
 class AppWindow(QMainWindow):
 
@@ -24,7 +26,7 @@ class AppWindow(QMainWindow):
     rep_libre_2_1_dialog = None
     
     # TODO 3 : ajouter les fenetres (rep. gui) et les actions (rep. actions) correspondant aux 2 items de la partie 3.
-    spectacles_dialog = None
+    main_spec_rep_dialog = None
     # On prévoit des variables pour accueillir les fenêtres supplémentaires
     tablesDataDialog = None
     fct_fournie_1_dialog = None
@@ -33,6 +35,7 @@ class AppWindow(QMainWindow):
     fct_comp_2_dialog = None
     fct_comp_3_dialog = None
     fct_comp_4_dialog = None
+    spectacles_dialog = None
     # Constructeur
     def __init__(self):
 
@@ -107,17 +110,22 @@ class AppWindow(QMainWindow):
     ####################################################################################################################
 
     # TODO 2 : ajouter la définition des méthodes déclenchées lors des clicks sur les boutons de la partie 2
+    def open_spec_rep(self):
+        if self.main_spec_rep_dialog is not None:
+            self.main_spec_rep_dialog.close()
+        self.main_spec_rep_dialog = AppMainSpecRep(self.data)
+        self.main_spec_rep_dialog.show()
+
+    # TODO 3 : ajouter la définition des méthodes déclenchées lors des clicks sur les boutons de la partie 3
     def open_rep_libre_2_1(self):
         if self.rep_libre_2_1_dialog is not None:
             self.rep_libre_2_1_dialog.close()
         self.rep_libre_2_1_dialog = AppRepLibre(self.data)
         self.rep_libre_2_1_dialog.show()
-
-    # TODO 3 : ajouter la définition des méthodes déclenchées lors des clicks sur les boutons de la partie 3
     def open_spectacles(self):
         if self.spectacles_dialog is not None:
             self.spectacles_dialog.close()
-        self.spectacles_dialog = AppFctComp3(self.data)
+        self.spectacles_dialog = AppSpectacle(self.data)
         self.spectacles_dialog.show()
     # En cas de clic sur le bouton de visualisation des données
     def openData(self):

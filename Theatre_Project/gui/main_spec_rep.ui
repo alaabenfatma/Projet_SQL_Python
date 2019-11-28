@@ -41,5 +41,42 @@
   </widget>
  </widget>
  <resources/>
- <connections/>
+ <connections>
+  <connection>
+   <sender>spectacles</sender>
+   <signal>clicked()</signal>
+   <receiver>Form</receiver>
+   <slot>open_spec()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>150</x>
+     <y>24</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>151</x>
+     <y>37</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>reps</sender>
+   <signal>clicked()</signal>
+   <receiver>Form</receiver>
+   <slot>open_rep()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>150</x>
+     <y>56</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>151</x>
+     <y>37</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
+ <slots>
+  <slot>open_spec()</slot>
+  <slot>open_rep()</slot>
+ </slots>
 </ui>

@@ -719,7 +719,7 @@
      <x>0</x>
      <y>0</y>
      <width>747</width>
-     <height>20</height>
+     <height>22</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuFiles">
@@ -762,8 +762,8 @@
    <slot>createDB()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>185</x>
-     <y>169</y>
+     <x>188</x>
+     <y>152</y>
     </hint>
     <hint type="destinationlabel">
      <x>135</x>
@@ -778,8 +778,8 @@
    <slot>insertDB()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>437</x>
-     <y>169</y>
+     <x>434</x>
+     <y>152</y>
     </hint>
     <hint type="destinationlabel">
      <x>388</x>
@@ -794,8 +794,8 @@
    <slot>deleteDB()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>641</x>
-     <y>169</y>
+     <x>637</x>
+     <y>152</y>
     </hint>
     <hint type="destinationlabel">
      <x>598</x>
@@ -810,8 +810,8 @@
    <slot>openData()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>488</x>
-     <y>200</y>
+     <x>480</x>
+     <y>185</y>
     </hint>
     <hint type="destinationlabel">
      <x>498</x>
@@ -858,8 +858,8 @@
    <slot>open_fct_comp_1()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>478</x>
-     <y>373</y>
+     <x>470</x>
+     <y>370</y>
     </hint>
     <hint type="destinationlabel">
      <x>515</x>
@@ -874,8 +874,8 @@
    <slot>open_fct_comp_2()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>517</x>
-     <y>481</y>
+     <x>505</x>
+     <y>488</y>
     </hint>
     <hint type="destinationlabel">
      <x>576</x>
@@ -890,8 +890,8 @@
    <slot>open_fct_comp_3()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>517</x>
-     <y>512</y>
+     <x>505</x>
+     <y>521</y>
     </hint>
     <hint type="destinationlabel">
      <x>551</x>
@@ -906,8 +906,8 @@
    <slot>open_fct_comp_4()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>570</x>
-     <y>543</y>
+     <x>555</x>
+     <y>554</y>
     </hint>
     <hint type="destinationlabel">
      <x>521</x>
@@ -922,8 +922,8 @@
    <slot>open_rep_libre_2_1()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>373</x>
-     <y>593</y>
+     <x>527</x>
+     <y>619</y>
     </hint>
     <hint type="destinationlabel">
      <x>373</x>
@@ -947,6 +947,22 @@
     </hint>
    </hints>
   </connection>
+  <connection>
+   <sender>pushButton_13</sender>
+   <signal>clicked()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>open_spec_rep()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>341</x>
+     <y>716</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>126</x>
+     <y>714</y>
+    </hint>
+   </hints>
+  </connection>
  </connections>
  <slots>
   <slot>createDB()</slot>
@@ -963,5 +979,6 @@
   <slot>open_fct_comp_4()</slot>
   <slot>open_rep_libre_2_1()</slot>
   <slot>open_spectacles()</slot>
+  <slot>open_spec_rep()</slot>
  </slots>
 </ui>
