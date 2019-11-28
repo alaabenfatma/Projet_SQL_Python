@@ -18,14 +18,7 @@ class AppFctComp4(QDialog):
             self.ui.spinBox_fct_4_dossier.setMaximum(row[0])
         self.refreshCatList()
         self.ui.spinBox_fct_4_dossier.valueChanged.connect(self.refreshCatList)
-    def get_corresponding_zones(self,value):
-        self.ui.comboBox_4_categorie.clear()
-        cursor = self.data.cursor()
-        
-        for row in self.cursor.execute("SELECT catZone FROM LesZones NATURAL JOIN LesDossiers WHERE noDos = ?", [value]):
-            self.ui.comboBox_4_categorie.addItem(row[0])
-            print(row[0])
-        print(value)
+
     # Fonction de mise à jour de l'affichage
     def refreshResult(self):
         # TODO 1.7 : fonction à modifier pour que le numéro de dossier ne puisse être choisi que parmi ceux présents dans la base et que la catégorie ne propose que des valeurs possibles pour le dossier choisi, une fois le fichier ui correspondant mis à jour

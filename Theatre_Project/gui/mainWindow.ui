@@ -640,6 +640,19 @@
        </widget>
       </item>
       <item>
+       <widget class="QPushButton" name="pushButton_12">
+        <property name="styleSheet">
+         <string notr="true">background-color: rgb(115, 210, 22);</string>
+        </property>
+        <property name="text">
+         <string>3.2 Gérer les spectacles</string>
+        </property>
+        <property name="flat">
+         <bool>false</bool>
+        </property>
+       </widget>
+      </item>
+      <item>
        <spacer name="horizontalSpacer_23">
         <property name="orientation">
          <enum>Qt::Horizontal</enum>
@@ -672,7 +685,7 @@
       <item>
        <widget class="QPushButton" name="pushButton_14">
         <property name="text">
-         <string>3.2 Gérer les réservations</string>
+         <string>3.3 Gérer les réservations</string>
         </property>
        </widget>
       </item>
@@ -951,7 +964,7 @@
    <sender>pushButton_13</sender>
    <signal>clicked()</signal>
    <receiver>MainWindow</receiver>
-   <slot>open_spec_rep()</slot>
+   <slot>open_rep()</slot>
    <hints>
     <hint type="sourcelabel">
      <x>341</x>
@@ -960,6 +973,38 @@
     <hint type="destinationlabel">
      <x>126</x>
      <y>714</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>pushButton_12</sender>
+   <signal>clicked()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>open_spec()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>475</x>
+     <y>711</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>598</x>
+     <y>711</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>pushButton_14</sender>
+   <signal>clicked()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>open_res_edit()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>373</x>
+     <y>746</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>373</x>
+     <y>431</y>
     </hint>
    </hints>
   </connection>
@@ -979,6 +1024,8 @@
   <slot>open_fct_comp_4()</slot>
   <slot>open_rep_libre_2_1()</slot>
   <slot>open_spectacles()</slot>
-  <slot>open_spec_rep()</slot>
+  <slot>open_spec()</slot>
+  <slot>open_rep()</slot>
+  <slot>open_res_edit()</slot>
  </slots>
 </ui>
