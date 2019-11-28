@@ -15,7 +15,8 @@ from actions.action_fct_comp_4 import AppFctComp4
 from actions.action_rep_libre_2_1 import AppRepLibre
 from actions.action_spectacle import AppSpectacle
 from actions.action_main_spec_rep import AppMainSpecRep
-
+from actions.action_edit_spec import AppEditSpec
+from actions.action_edit_rep import AppEditRep
 # Classe utilisée pour lancer la fenêtre principale de l'application et définir ses actions
 class AppWindow(QMainWindow):
 
@@ -26,7 +27,8 @@ class AppWindow(QMainWindow):
     rep_libre_2_1_dialog = None
     
     # TODO 3 : ajouter les fenetres (rep. gui) et les actions (rep. actions) correspondant aux 2 items de la partie 3.
-    main_spec_rep_dialog = None
+    spec_dialog = None
+    rep_dialog = None
     # On prévoit des variables pour accueillir les fenêtres supplémentaires
     tablesDataDialog = None
     fct_fournie_1_dialog = None
@@ -110,18 +112,34 @@ class AppWindow(QMainWindow):
     ####################################################################################################################
 
     # TODO 2 : ajouter la définition des méthodes déclenchées lors des clicks sur les boutons de la partie 2
-    def open_spec_rep(self):
-        if self.main_spec_rep_dialog is not None:
-            self.main_spec_rep_dialog.close()
-        self.main_spec_rep_dialog = AppMainSpecRep(self.data)
-        self.main_spec_rep_dialog.show()
+    
 
     # TODO 3 : ajouter la définition des méthodes déclenchées lors des clicks sur les boutons de la partie 3
+    def open_spec(self):
+        if self.spec_dialog is not None:
+            self.spec_dialog.close()
+        self.spec_dialog = AppEditSpec(self.data)
+        self.spec_dialog.show()
+    def open_rep(self):
+        if self.rep_dialog is not None:
+            self.rep_dialog.close()
+        self.rep_dialog = AppEditRep(self.data)
+        self.rep_dialog.show()
     def open_rep_libre_2_1(self):
         if self.rep_libre_2_1_dialog is not None:
             self.rep_libre_2_1_dialog.close()
         self.rep_libre_2_1_dialog = AppRepLibre(self.data)
         self.rep_libre_2_1_dialog.show()
+    def open_spec(self):
+        if self.spec_dialog is not None:
+            self.spec_dialog.close()
+        self.spec_dialog = AppEditSpec(self.data)
+        self.spec_dialog.show()
+    def open_rep(self):
+        if self.rep_dialog is not None:
+            self.rep_dialog.close()
+        self.rep_dialog = AppEditRep(self.data)
+        self.rep_dialog.show()
     def open_spectacles(self):
         if self.spectacles_dialog is not None:
             self.spectacles_dialog.close()
