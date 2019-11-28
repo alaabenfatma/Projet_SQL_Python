@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>add_spec</class>
+ <widget class="QDialog" name="add_spec">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>600</width>
+    <height>234</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Créer un nouveau ticket</string>
+  </property>
+  <layout class="QVBoxLayout" name="verticalLayout">
+   <item>
+    <widget class="QLabel" name="label">
+     <property name="text">
+      <string>Créer un nouveau spectacle</string>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignCenter</set>
+     </property>
+     <property name="wordWrap">
+      <bool>true</bool>
+     </property>
+    </widget>
+   </item>
+   <item>
+    <layout class="QHBoxLayout" name="horizontalLayout_7">
+     <item>
+      <widget class="QLabel" name="label_8">
+       <property name="text">
+        <string>Saisissez N° du spectacle :</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QSpinBox" name="num"/>
+     </item>
+    </layout>
+   </item>
+   <item>
+    <layout class="QHBoxLayout" name="horizontalLayout">
+     <item>
+      <widget class="QLabel" name="label_2">
+       <property name="text">
+        <string>Saisissez un nom du spectacle :</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QLineEdit" name="nom"/>
+     </item>
+    </layout>
+   </item>
+   <item>
+    <layout class="QHBoxLayout" name="horizontalLayout_2">
+     <item>
+      <widget class="QLabel" name="label_3">
+       <property name="text">
+        <string>Saisissez le prix du spectacle :</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QDoubleSpinBox" name="prix"/>
+     </item>
+    </layout>
+   </item>
+   <item>
+    <widget class="QPushButton" name="pushButton">
+     <property name="text">
+      <string>Créer le spectacle</string>
+     </property>
+    </widget>
+   </item>
+   <item>
+    <widget class="QLabel" name="status">
+     <property name="text">
+      <string/>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignCenter</set>
+     </property>
+    </widget>
+   </item>
+  </layout>
+ </widget>
+ <resources/>
+ <connections>
+  <connection>
+   <sender>pushButton</sender>
+   <signal>clicked()</signal>
+   <receiver>add_spec</receiver>
+   <slot>ajout()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>299</x>
+     <y>190</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>299</x>
+     <y>116</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
+ <slots>
+  <slot>ajout()</slot>
+ </slots>
+</ui>

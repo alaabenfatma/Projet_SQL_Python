@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>fct_comp_1</class>
- <widget class="QDialog" name="fct_comp_1">
+ <class>delete_form</class>
+ <widget class="QDialog" name="delete_form">
   <property name="geometry">
    <rect>
     <x>0</x>
@@ -61,7 +61,7 @@
       <bool>false</bool>
      </property>
      <property name="text">
-      <string>Ajout</string>
+      <string>Ajout d'un nouveau spectacle</string>
      </property>
      <property name="icon">
       <iconset>
@@ -72,7 +72,7 @@
    <item>
     <widget class="QPushButton" name="btn_edit">
      <property name="text">
-      <string>Modifier</string>
+      <string>Modifier le spectacle selectionné</string>
      </property>
      <property name="icon">
       <iconset>
@@ -83,7 +83,7 @@
    <item>
     <widget class="QPushButton" name="btn_del">
      <property name="text">
-      <string>Supprimer</string>
+      <string>Supprimer le spectacle selectionné</string>
      </property>
      <property name="icon">
       <iconset>
@@ -98,7 +98,7 @@
   <connection>
    <sender>add_btn</sender>
    <signal>clicked()</signal>
-   <receiver>fct_comp_1</receiver>
+   <receiver>delete_form</receiver>
    <slot>ajout()</slot>
    <hints>
     <hint type="sourcelabel">
@@ -111,8 +111,25 @@
     </hint>
    </hints>
   </connection>
+  <connection>
+   <sender>btn_del</sender>
+   <signal>clicked()</signal>
+   <receiver>delete_form</receiver>
+   <slot>delete()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>247</x>
+     <y>402</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>247</x>
+     <y>211</y>
+    </hint>
+   </hints>
+  </connection>
  </connections>
  <slots>
   <slot>ajout()</slot>
+  <slot>delete()</slot>
  </slots>
 </ui>
