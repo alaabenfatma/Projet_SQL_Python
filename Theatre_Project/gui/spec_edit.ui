@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>495</width>
-    <height>424</height>
+    <height>407</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -45,12 +45,12 @@
      </column>
      <column>
       <property name="text">
-       <string>dateRep</string>
+       <string>nomSpec</string>
       </property>
      </column>
      <column>
       <property name="text">
-       <string>promoRep</string>
+       <string>prixBaseSpec</string>
       </property>
      </column>
     </widget>
@@ -88,6 +88,13 @@
      <property name="icon">
       <iconset>
        <normaloff>negative.png</normaloff>negative.png</iconset>
+     </property>
+    </widget>
+   </item>
+   <item>
+    <widget class="QLabel" name="status">
+     <property name="text">
+      <string/>
      </property>
     </widget>
    </item>

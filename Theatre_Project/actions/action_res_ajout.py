@@ -18,15 +18,15 @@ class AppResAjout(QDialog):
             self.ui.spinBox.setMaximum(row[0])
         for row in self.cursor.execute('SELECT nomSpec FROM LesSpectacles'):
             self.ui.combo_sql_spec.addItem(row[0])
-        index = self.ui.combo_sql_spec.currentIndex()
-        #self.ui.combo_sql_spec.clear()
-        for row in self.cursor.execute('SELECT dateRep FROM LesRepresentations NATURAL JOIN LesSpectacles WHERE nomSpec LIKE ?',[self.ui.combo_sql_spec.itemText(index)]):
-            self.ui.combo_sql_rep.addItem(row[0])
+        
 
     # Fonction de mise à jour de l'affichage
     @pyqtSlot()
     def refreshResult(self):
-        #display.refreshLabel(self.ui.label_fct_comp_1, "")
+        self.ui.combo_sql_rep.clear()
+        index = self.ui.combo_sql_spec.currentIndex()
+        for row in self.cursor.execute('SELECT dateRep FROM LesRepresentations NATURAL JOIN LesSpectacles WHERE nomSpec LIKE ?',[self.ui.combo_sql_spec.itemText(index)]):
+            self.ui.combo_sql_rep.addItem(row[0])
         try:
             cursor = self.data.cursor()
             # TODO 1.1 : mettre à jour la requête et changer aussi le fichier ui correspondant

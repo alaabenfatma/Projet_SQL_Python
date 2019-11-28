@@ -148,7 +148,24 @@
   </layout>
  </widget>
  <resources/>
- <connections/>
+ <connections>
+  <connection>
+   <sender>combo_sql_spec</sender>
+   <signal>activated(QString)</signal>
+   <receiver>table</receiver>
+   <slot>refreshResult()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>392</x>
+     <y>81</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>297</x>
+     <y>79</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
  <slots>
   <slot>refreshResult()</slot>
  </slots>
