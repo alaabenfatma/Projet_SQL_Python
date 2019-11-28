@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>fct_comp_1</class>
+ <widget class="QDialog" name="fct_comp_1">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>236</width>
+    <height>424</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Modifier les répresentations</string>
+  </property>
+  <layout class="QVBoxLayout" name="verticalLayout">
+   <item>
+    <widget class="QLabel" name="label">
+     <property name="text">
+      <string>Representations actuelles :</string>
+     </property>
+    </widget>
+   </item>
+   <item>
+    <widget class="QListView" name="lv"/>
+   </item>
+   <item>
+    <widget class="QPushButton" name="add_btn">
+     <property name="autoFillBackground">
+      <bool>false</bool>
+     </property>
+     <property name="text">
+      <string>Ajout</string>
+     </property>
+     <property name="icon">
+      <iconset theme="2">
+       <normaloff>plus.png</normaloff>plus.png</iconset>
+     </property>
+    </widget>
+   </item>
+   <item>
+    <widget class="QPushButton" name="btn_edit">
+     <property name="text">
+      <string>Modifier</string>
+     </property>
+     <property name="icon">
+      <iconset>
+       <normaloff>pen.png</normaloff>pen.png</iconset>
+     </property>
+    </widget>
+   </item>
+   <item>
+    <widget class="QPushButton" name="btn_del">
+     <property name="text">
+      <string>Supprimer</string>
+     </property>
+     <property name="icon">
+      <iconset>
+       <normaloff>negative.png</normaloff>negative.png</iconset>
+     </property>
+    </widget>
+   </item>
+  </layout>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>
