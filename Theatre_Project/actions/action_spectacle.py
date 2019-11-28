@@ -5,33 +5,27 @@ from PyQt5.QtWidgets import QDialog
 from PyQt5.QtCore import pyqtSlot
 from PyQt5 import uic
 
-# Classe permettant d'afficher la fonction à compléter 2
+# Classe permettant d'afficher la fonction à compléter 1
 class AppSpectacle(QDialog):
 
     # Constructeur
     def __init__(self, data:sqlite3.Connection):
         super(QDialog, self).__init__()
-        self.ui = uic.loadUi("gui/fct_comp_2.ui", self)
+        self.ui = uic.loadUi("gui/spectacles.ui", self)
         self.data = data
+        self.refreshResult()
 
-    # Fonction de mise à joru de l'affichage
+    # Fonction de mise à jour de l'affichage
     @pyqtSlot()
     def refreshResult(self):
-        # TODO 1.5 : fonction à modifier pour remplacer la zone de saisie par une liste de valeurs prédéfinies dans l'interface une fois le fichier ui correspondant mis à jour
-        display.refreshLabel(self.ui.label_fct_comp_2, "")
-        if not self.ui.combo_cat.currentText():
-            self.ui.table_fct_comp_2.setRowCount(0)
-            display.refreshLabel(self.ui.label_fct_comp_2, "Veuillez indiquer un nom de catégorie")
+
+        display.refreshLabel(self.ui.label_fct_comp_1, "")
+        try:
+            cursor = self.data.cursor()
+            result = cursor.execute("WITH nbPlaces AS (SELECT * FROM LesPlaces) SELECT noSpec, nomSpec, dateRep, ((SELECT count(*) FROM nbPlaces) - PlacesDispo) AS nbPlacesReserves  FROM LesSpectacles NATURAL JOIN LesRepresentations ORDER BY noSpec;")
+            display.refreshLabel(self.ui.label_fct_comp_1, "")
+        except Exception as e:
+            self.ui.table_fct_comp_1.setRowCount(0)
+            display.refreshLabel(self.ui.label_fct_comp_1, "Impossible d'afficher les résultats : " + repr(e))
         else:
-            try:
-                cursor = self.data.cursor()
-                result = cursor.execute(
-                    "SELECT noPlace, noRang, noZone FROM LesZones NATURAL JOIN LesPlaces WHERE catZone = ?",
-                    [self.ui.combo_cat.currentText()])
-            except Exception as e:
-                self.ui.table_fct_comp_2.setRowCount(0)
-                display.refreshLabel(self.ui.label_fct_comp_2, "Impossible d'afficher les résultats : " + repr(e))
-            else:
-                i = display.refreshGenericData(self.ui.table_fct_comp_2, result)
-                if i == 0:
-                    display.refreshLabel(self.ui.label_fct_comp_2, "Aucun résultat")
+            display.refreshGenericData(self.ui.table_fct_comp_1, result)
