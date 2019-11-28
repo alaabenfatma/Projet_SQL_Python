@@ -29,3 +29,6 @@ class AppEditSpec(QDialog):
             print("Impossible d'afficher les résultats : " + repr(e))
         else:
             display.refreshGenericData(self.ui.table, result)
+    def ajout(self):
+            self.selected_row = self.ui.table.selectedItems()
+            print(self.selected_row[0].text())
