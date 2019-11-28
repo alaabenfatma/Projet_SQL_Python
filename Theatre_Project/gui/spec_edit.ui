@@ -22,7 +22,35 @@
     </widget>
    </item>
    <item>
-    <widget class="QTableView" name="t_data"/>
+    <widget class="QTableWidget" name="table">
+     <attribute name="horizontalHeaderDefaultSectionSize">
+      <number>110</number>
+     </attribute>
+     <attribute name="horizontalHeaderMinimumSectionSize">
+      <number>50</number>
+     </attribute>
+     <attribute name="horizontalHeaderStretchLastSection">
+      <bool>true</bool>
+     </attribute>
+     <attribute name="verticalHeaderVisible">
+      <bool>false</bool>
+     </attribute>
+     <column>
+      <property name="text">
+       <string>noSpec</string>
+      </property>
+     </column>
+     <column>
+      <property name="text">
+       <string>dateRep</string>
+      </property>
+     </column>
+     <column>
+      <property name="text">
+       <string>promoRep</string>
+      </property>
+     </column>
+    </widget>
    </item>
    <item>
     <widget class="QPushButton" name="add_btn">
@@ -64,4 +92,5 @@
  </widget>
  <resources/>
  <connections/>
+ 
 </ui>

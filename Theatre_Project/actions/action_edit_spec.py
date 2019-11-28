@@ -13,19 +13,19 @@ class AppEditSpec(QDialog):
         super(QDialog, self).__init__()
         self.ui = uic.loadUi("gui/spec_edit.ui", self)
         self.data = data
-        #self.refreshResult()
+        self.refreshResult()
 
     # Fonction de mise à jour de l'affichage
     @pyqtSlot()
     def refreshResult(self):
-        display.refreshLabel(self.ui.label_fct_comp_1, "")
+        #display.refreshLabel(self.ui.label_fct_comp_1, "")
         try:
             cursor = self.data.cursor()
             # TODO 1.1 : mettre à jour la requête et changer aussi le fichier ui correspondant
-            result = cursor.execute("SELECT noSpec, dateRep, noPlace, noRang, dateEmTick,noDos  FROM LesTickets")
-            display.refreshLabel(self.ui.label_fct_comp_1, "")
+            result = cursor.execute("SELECT noSpec, dateRep, promoRep  FROM LesRepresentations_base;")
         except Exception as e:
-            self.ui.table_fct_comp_1.setRowCount(0)
-            display.refreshLabel(self.ui.label_fct_comp_1, "Impossible d'afficher les résultats : " + repr(e))
+            self.ui.table.setRowCount(0)
+            #display.refreshLabel(self.ui.label_fct_comp_1, "Impossible d'afficher les résultats : " + repr(e))
+            print("Impossible d'afficher les résultats : " + repr(e))
         else:
-            display.refreshGenericData(self.ui.table_fct_comp_1, result)
+            display.refreshGenericData(self.ui.table, result)
