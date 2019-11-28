@@ -6,23 +6,74 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>495</width>
+    <width>781</width>
     <height>424</height>
    </rect>
   </property>
   <property name="windowTitle">
-   <string>Gestion des réservations</string>
+   <string>Les reservations</string>
   </property>
   <layout class="QVBoxLayout" name="verticalLayout">
    <item>
     <widget class="QLabel" name="label">
      <property name="text">
-      <string>Les réservations:</string>
+      <string>Les reservations:</string>
      </property>
     </widget>
    </item>
    <item>
-    <widget class="QTableView" name="t_data"/>
+    <widget class="QTableWidget" name="table">
+     <property name="selectionBehavior">
+      <enum>QAbstractItemView::SelectRows</enum>
+     </property>
+     <attribute name="horizontalHeaderDefaultSectionSize">
+      <number>110</number>
+     </attribute>
+     <attribute name="horizontalHeaderMinimumSectionSize">
+      <number>50</number>
+     </attribute>
+     <attribute name="horizontalHeaderStretchLastSection">
+      <bool>true</bool>
+     </attribute>
+     <attribute name="verticalHeaderVisible">
+      <bool>false</bool>
+     </attribute>
+     <column>
+      <property name="text">
+       <string>noSpec</string>
+      </property>
+     </column>
+     <column>
+      <property name="text">
+       <string>dateRep</string>
+      </property>
+     </column>
+     <column>
+      <property name="text">
+       <string>noPlace</string>
+      </property>
+     </column>
+     <column>
+      <property name="text">
+       <string>noRang</string>
+      </property>
+     </column>
+     <column>
+      <property name="text">
+       <string>dateEmissionTick</string>
+      </property>
+     </column>
+     <column>
+      <property name="text">
+       <string>libelleCat</string>
+      </property>
+     </column>
+     <column>
+      <property name="text">
+       <string>noDos</string>
+      </property>
+     </column>
+    </widget>
    </item>
    <item>
     <widget class="QPushButton" name="add_btn">
@@ -63,5 +114,26 @@
   </layout>
  </widget>
  <resources/>
- <connections/>
+ <connections>
+  <connection>
+   <sender>add_btn</sender>
+   <signal>clicked()</signal>
+   <receiver>fct_comp_1</receiver>
+   <slot>open_res_ajout()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>390</x>
+     <y>340</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>390</x>
+     <y>211</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
+ <slots>
+  <slot>ajout()</slot>
+  <slot>open_res_ajout()</slot>
+ </slots>
 </ui>
