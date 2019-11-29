@@ -134,9 +134,26 @@
     </hint>
    </hints>
   </connection>
+  <connection>
+   <sender>btn_edit</sender>
+   <signal>clicked()</signal>
+   <receiver>delete_form</receiver>
+   <slot>modify()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>247</x>
+     <y>332</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>247</x>
+     <y>203</y>
+    </hint>
+   </hints>
+  </connection>
  </connections>
  <slots>
   <slot>ajout()</slot>
   <slot>delete()</slot>
+  <slot>modify()</slot>
  </slots>
 </ui>

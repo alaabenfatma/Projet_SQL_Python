@@ -5,6 +5,7 @@ from PyQt5.QtCore import pyqtSlot
 from PyQt5 import uic
 from PyQt5.QtWidgets import QMessageBox
 from actions.action_add_spec import AppAddSpec
+from actions.action_modify_spec import AppModifSpec
 # Classe permettant d'afficher la fonction à compléter 1
 class AppEditSpec(QDialog):
 
@@ -14,6 +15,7 @@ class AppEditSpec(QDialog):
         self.ui = uic.loadUi("gui/spec_edit.ui", self)
         self.data = data
         self.spec_ajout = None
+        self.spec_modif = None
         self.refreshResult()
 
     # Fonction de mise à jour de l'affichage
@@ -34,6 +36,12 @@ class AppEditSpec(QDialog):
                 self.spec_ajout.close()
             self.spec_ajout = AppAddSpec(self.data,self)
             self.spec_ajout.show()
+    def modify(self):
+            if self.spec_modif is not None:
+                self.spec_modif.close()
+            self.spec_modif = AppModifSpec(self.data,self,self.ui.table.selectedItems()[0].text())
+            self.spec_modif.show()
+
     def delete(self):
         self.selected_row = self.ui.table.selectedItems()
         msg =  QMessageBox()
@@ -48,7 +56,12 @@ class AppEditSpec(QDialog):
         self.no_spec = self.selected_row[0].text()
         self.no_spec = int(self.no_spec)
         print(self.no_spec)
-        if(int(list(res)[0][0])>0):
+        if(msg.exec() == QMessageBox.Yes):
+            try:
+                result = c.execute(
+                    "DELETE FROM LesSpectacles WHERE noSpec = ?",
+                    [self.no_spec])
+                if(int(list(res)[0][0])>0):
                     msg1 =  QMessageBox()
                     msg1.setWindowTitle("Suppression")
                     msg1.setText("Voulez-vous supprimer également les representations et les places associées a ce spectacle?")
@@ -57,7 +70,6 @@ class AppEditSpec(QDialog):
                     msg1.setDefaultButton(QMessageBox.No)
                     if(msg1.exec() == QMessageBox.Yes):
                         try:
-                            
                             result = c.execute(
                                 "DELETE FROM LesRepresentations_base WHERE noSpec = ?",
                                 [self.no_spec])
@@ -73,12 +85,6 @@ class AppEditSpec(QDialog):
                             self.refreshResult()
                             self.data.commit()
                             pass
-        if(msg.exec() == QMessageBox.Yes):
-            try:
-                result = c.execute(
-                    "DELETE FROM LesSpectacles WHERE noSpec = ?",
-                    [self.no_spec])
-                
             except Exception as e:
                 display.refreshLabel(self.ui.status,"Erreur de supression : "+repr(e))
                 print(repr(e))
@@ -88,3 +94,5 @@ class AppEditSpec(QDialog):
                 self.refreshResult()
                 self.data.commit()
                 pass
+        
+        
