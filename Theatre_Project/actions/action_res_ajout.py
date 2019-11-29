@@ -18,7 +18,16 @@ class AppResAjout(QDialog):
             self.ui.spinBox.setMaximum(row[0])
         for row in self.cursor.execute('SELECT nomSpec FROM LesSpectacles'):
             self.ui.combo_sql_spec.addItem(row[0])
-        
+        index = self.ui.combo_sql_spec.currentIndex()
+        for row in self.cursor.execute('SELECT dateRep FROM LesRepresentations NATURAL JOIN LesSpectacles WHERE nomSpec LIKE ?',[self.ui.combo_sql_spec.itemText(index)]):
+            self.ui.combo_sql_rep.addItem(row[0])
+        index2 = self.ui.combo_sql_rep.currentIndex()
+        for row in self.cursor.execute('SELECT catZone FROM LesZones'):
+            self.ui.comboBox.addItem(row[0])
+        for row in self.cursor.execute('SELECT libelleCat FROM LesCategoriesTickets'):
+            self.ui.comboBox_2.addItem(row[0])
+        for row in self.cursor.execute('SELECT DISTINCT noPlace FROM LesPlaces'):
+            self.ui.comboBox_3.addItem(str(row[0]))
 
     # Fonction de mise à jour de l'affichage
     @pyqtSlot()
