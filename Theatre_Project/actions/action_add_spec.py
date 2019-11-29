@@ -28,10 +28,12 @@ class AppAddSpec(QDialog):
                 result = cursor.execute(
                     "insert into LesSpectacles(noSpec, nomSpec, prixBaseSpec) values (?, ?, ?);",
                     [num,nom,prix])
+            
             except Exception as e:
                 print( "Impossible d'afficher les résultats : " + repr(e))
                 display.refreshLabel(self.ui.status, "Impossible d'afficher les résultats : " + repr(e))
             else:
                 display.refreshLabel(self.ui.status, "Spectacle ajouté avec succés")
+                self.data.commit()
                 self.parent.refreshResult()
                 

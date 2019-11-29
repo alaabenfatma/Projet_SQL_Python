@@ -232,7 +232,8 @@ class AppWindow(QMainWindow):
             self.fct_comp_4_dialog.close()
         if (self.rep_libre_2_1_dialog is not None):
             self.rep_libre_2_1_dialog.close()
-
+        if (self.spec_dialog is not None):
+            self.spec_dialog.close()
         # On ferme proprement la base de données
         self.data.close()
 

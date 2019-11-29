@@ -42,15 +42,49 @@ class AppEditSpec(QDialog):
         msg.setStandardButtons(QMessageBox.Yes)
         msg.addButton(QMessageBox.No)
         msg.setDefaultButton(QMessageBox.No)
+        c =  self.data.cursor()
+        req = "select count(*) from lestickets where nospec = ?"
+        res = c.execute(req,[self.selected_row[0].text()])
+        self.no_spec = self.selected_row[0].text()
+        self.no_spec = int(self.no_spec)
+        print(self.no_spec)
+        if(int(list(res)[0][0])>0):
+                    msg1 =  QMessageBox()
+                    msg1.setWindowTitle("Suppression")
+                    msg1.setText("Voulez-vous supprimer également les representations et les places associées a ce spectacle?")
+                    msg1.setStandardButtons(QMessageBox.Yes)
+                    msg1.addButton(QMessageBox.No)
+                    msg1.setDefaultButton(QMessageBox.No)
+                    if(msg1.exec() == QMessageBox.Yes):
+                        try:
+                            
+                            result = c.execute(
+                                "DELETE FROM LesRepresentations_base WHERE noSpec = ?",
+                                [self.no_spec])
+                            result = c.execute(
+                                "DELETE FROM Lestickets WHERE noSpec = ?",
+                                [self.no_spec])
+                        except Exception as e:
+                            display.refreshLabel(self.ui.status,"Erreur de supression : "+repr(e))
+                            print(repr(e))
+                            pass
+                        else:
+                            display.refreshLabel(self.ui.status,"Le spectacle {0} a été supprimé.".format(self.no_spec))
+                            self.refreshResult()
+                            self.data.commit()
+                            pass
         if(msg.exec() == QMessageBox.Yes):
             try:
-                 result = self.cursor.execute(
-                    "insert into LesSpectacles(noSpec, nomSpec, prixBaseSpec) values (?, ?, ?);",
-                    [self.selected_row[0].text()])
+                result = c.execute(
+                    "DELETE FROM LesSpectacles WHERE noSpec = ?",
+                    [self.no_spec])
+                
             except Exception as e:
                 display.refreshLabel(self.ui.status,"Erreur de supression : "+repr(e))
+                print(repr(e))
                 pass
             else:
-                display.refreshLabel(self.ui.status,"Le spectacle {0} a été supprimé.".format(self.selected_row[0].text()))
+                display.refreshLabel(self.ui.status,"Le spectacle {0} a été supprimé.".format(self.no_spec))
                 self.refreshResult()
+                self.data.commit()
                 pass
