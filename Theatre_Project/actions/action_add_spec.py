@@ -17,8 +17,14 @@ class AppAddSpec(QDialog):
     
     def ajout(self):
         display.refreshLabel(self.ui.status, "")
-        if((self.ui.nom.text=="") or( float(self.ui.prix.text().strip().replace(',','.')) == 0)):
-            display.refreshLabel(self.ui.status, "Veuillez vérifier le nom du spectacle & le prix")
+        try:
+            self.price = float(self.ui.prix.text().strip().replace(',','.'))
+        except Exception as e:
+            self.price = float(self.ui.prix.text().strip())
+        if(self.ui.nom.text==""): 
+            display.refreshLabel(self.ui.status, "Veuillez vérifier le nom du spectacle")
+        elif ( self.price == 0):
+            display.refreshLabel(self.ui.status, "Veuillez vérifier le nom du spectacle")
         else:
             try:
                 num = self.ui.num.text().strip()

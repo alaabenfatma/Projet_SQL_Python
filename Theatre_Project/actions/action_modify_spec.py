@@ -22,12 +22,18 @@ class AppModifSpec(QDialog):
         self.price = ((res)[0][2])
         self.ui.num.setValue(int(nospec))
         self.ui.nom.setText(str(self.name))
-        self.ui.prix.setValue(float(self.price.replace(',','.')))
-
+        self.ui.prix.setValue(float(self.price))
+        
     def update(self):
         display.refreshLabel(self.ui.status, "")
-        if((self.ui.nom.text=="") or( float(self.ui.prix.text().strip().replace(',','.')) == 0)):
-            display.refreshLabel(self.ui.status, "Veuillez vérifier le nom du spectacle & le prix")
+        try:
+            self.price = float(self.ui.prix.text().strip().replace(',','.'))
+        except Exception as e:
+            self.price = float(self.ui.prix.text().strip())
+        if(self.ui.nom.text==""): 
+            display.refreshLabel(self.ui.status, "Veuillez vérifier le nom du spectacle")
+        elif ( self.price == 0):
+            display.refreshLabel(self.ui.status, "Veuillez vérifier le prix du spectacle")
         else:
             try:
                 num = self.ui.num.text().strip()
@@ -35,8 +41,8 @@ class AppModifSpec(QDialog):
                 prix = self.ui.prix.text().strip()
                 cursor = self.data.cursor()
                 result = cursor.execute(
-                    "insert into LesSpectacles(noSpec, nomSpec, prixBaseSpec) values (?, ?, ?);",
-                    [num,nom,prix])
+                    "UPDATE LesSpectacles SET nospec = ?, nomspec= ?, prixbasespec = ? WHERE nospec = ?;",
+                    [num,nom,prix,num])
             
             except Exception as e:
                 print( "Impossible d'afficher les résultats : " + repr(e))
