@@ -28,7 +28,9 @@ class AppResAjout(QDialog):
             self.ui.comboBox_2.addItem(row[0])
         for row in self.cursor.execute('SELECT DISTINCT noPlace FROM LesPlaces'):
             self.ui.comboBox_3.addItem(str(row[0]))
-
+        index3 = self.ui.combo_sql_rep.currentIndex()
+        for row in self.cursor.execute('SELECT noRang FROM LesPlaces EXCEPT SELECT noRang FROM LesTickets NATURAL JOIN LesSpectacles WHERE nomSpec LIKE ? AND noPlace = ? AND dateRep = ? ', [self.ui.combo_sql_spec.itemText(index), self.ui.comboBox_3.itemText(index3), self.ui.combo_sql_rep.itemText(index)]):
+            self.ui.comboBox_4.addItem(str(row[0]))
     # Fonction de mise à jour de l'affichage
     @pyqtSlot()
     def refreshResult(self):
