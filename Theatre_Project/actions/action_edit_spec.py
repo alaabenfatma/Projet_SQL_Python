@@ -56,12 +56,14 @@ class AppEditSpec(QDialog):
         self.no_spec = self.selected_row[0].text()
         self.no_spec = int(self.no_spec)
         print(self.no_spec)
+        self.num_of_tickets = list(res)[0][0]
         if(msg.exec() == QMessageBox.Yes):
             try:
                 result = c.execute(
                     "DELETE FROM LesSpectacles WHERE noSpec = ?",
                     [self.no_spec])
-                if(int(list(res)[0][0])>0):
+                print(self.num_of_tickets)
+                if(self.num_of_tickets>0):
                     msg1 =  QMessageBox()
                     msg1.setWindowTitle("Suppression")
                     msg1.setText("Voulez-vous supprimer également les representations et les places associées a ce spectacle?")
