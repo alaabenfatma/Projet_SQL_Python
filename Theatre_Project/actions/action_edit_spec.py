@@ -6,6 +6,7 @@ from PyQt5 import uic
 from PyQt5.QtWidgets import QMessageBox
 from actions.action_add_spec import AppAddSpec
 from actions.action_modify_spec import AppModifSpec
+from actions.action_get_value import AppGetValue
 # Classe permettant d'afficher la fonction à compléter 1
 class AppEditSpec(QDialog):
 
@@ -16,6 +17,7 @@ class AppEditSpec(QDialog):
         self.data = data
         self.spec_ajout = None
         self.spec_modif = None
+        self.spec_search = None
         self.refreshResult()
 
     # Fonction de mise à jour de l'affichage
@@ -25,6 +27,24 @@ class AppEditSpec(QDialog):
         try:
             cursor = self.data.cursor()
             result = cursor.execute("SELECT * FROM LesSpectacles;")
+        except Exception as e:
+            self.ui.table.setRowCount(0)
+            #display.refreshLabel(self.ui.label_fct_comp_1, "Impossible d'afficher les résultats : " + repr(e))
+            print("Impossible d'afficher les résultats : " + repr(e))
+        else:
+            display.refreshGenericData(self.ui.table, result)
+    def open_search(self):
+        if self.spec_search is not None:
+                self.spec_search.close()
+        self.spec_search = AppGetValue(self.data,self,"N° du spectacle:")
+        self.spec_search.show()
+    def search(self,x):
+        try:
+            cursor = self.data.cursor()
+            if(x!=""):
+                result = cursor.execute("SELECT * FROM LesSpectacles where nospec LIKE ?;",[x])
+            else:
+                result = cursor.execute("SELECT * FROM LesSpectacles;")
         except Exception as e:
             self.ui.table.setRowCount(0)
             #display.refreshLabel(self.ui.label_fct_comp_1, "Impossible d'afficher les résultats : " + repr(e))
