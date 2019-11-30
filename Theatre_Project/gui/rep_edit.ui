@@ -11,13 +11,13 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>Modifier les spectacles</string>
+   <string>Modifier les représentations</string>
   </property>
   <layout class="QVBoxLayout" name="verticalLayout">
    <item>
     <widget class="QLabel" name="label">
      <property name="text">
-      <string>Spectacles actuels :</string>
+      <string>Representations actuels :</string>
      </property>
     </widget>
    </item>
@@ -45,12 +45,12 @@
      </column>
      <column>
       <property name="text">
-       <string>nomSpec</string>
+       <string>New Column</string>
       </property>
      </column>
      <column>
       <property name="text">
-       <string>prixBaseSpec</string>
+       <string>promoRep</string>
       </property>
      </column>
     </widget>
@@ -72,7 +72,7 @@
       <bool>false</bool>
      </property>
      <property name="text">
-      <string>Ajout d'un nouveau spectacle</string>
+      <string>Ajout d'une nouvelle représentations</string>
      </property>
      <property name="icon">
       <iconset>
@@ -83,7 +83,7 @@
    <item>
     <widget class="QPushButton" name="btn_edit">
      <property name="text">
-      <string>Modifier le spectacle selectionné</string>
+      <string>Modifier la représentation selectionée</string>
      </property>
      <property name="icon">
       <iconset>
@@ -94,7 +94,7 @@
    <item>
     <widget class="QPushButton" name="btn_del">
      <property name="text">
-      <string>Supprimer le spectacle selectionné</string>
+      <string>Supprimer la spectacle selectionné</string>
      </property>
      <property name="icon">
       <iconset>

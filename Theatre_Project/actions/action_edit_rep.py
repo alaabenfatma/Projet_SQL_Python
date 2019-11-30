@@ -4,20 +4,20 @@ from PyQt5.QtWidgets import QDialog
 from PyQt5.QtCore import pyqtSlot
 from PyQt5 import uic
 from PyQt5.QtWidgets import QMessageBox
-from actions.action_add_spec import AppAddSpec
+from actions.action_add_rep import AppAddRep
 from actions.action_modify_spec import AppModifSpec
 from actions.action_get_value import AppGetValue
 # Classe permettant d'afficher la fonction à compléter 1
-class AppEditSpec(QDialog):
+class AppEditRep(QDialog):
 
     # Constructeur
     def __init__(self, data:sqlite3.Connection):
         super(QDialog, self).__init__()
-        self.ui = uic.loadUi("gui/spec_edit.ui", self)
+        self.ui = uic.loadUi("gui/rep_edit.ui", self)
         self.data = data
-        self.spec_ajout = None
-        self.spec_modif = None
-        self.spec_search = None
+        self.rep_ajout = None
+        self.rep_modif = None
+        self.rep_search = None
         self.refreshResult()
 
     # Fonction de mise à jour de l'affichage
@@ -26,7 +26,7 @@ class AppEditSpec(QDialog):
         #display.refreshLabel(self.ui.label_fct_comp_1, "")
         try:
             cursor = self.data.cursor()
-            result = cursor.execute("SELECT * FROM LesSpectacles;")
+            result = cursor.execute("SELECT * FROM LesRepresentations;")
         except Exception as e:
             self.ui.table.setRowCount(0)
             #display.refreshLabel(self.ui.label_fct_comp_1, "Impossible d'afficher les résultats : " + repr(e))
@@ -34,17 +34,17 @@ class AppEditSpec(QDialog):
         else:
             display.refreshGenericData(self.ui.table, result)
     def open_search(self):
-        if self.spec_search is not None:
-                self.spec_search.close()
-        self.spec_search = AppGetValue(self.data,self,"N° du spectacle:")
-        self.spec_search.show()
+        if self.rep_search is not None:
+                self.rep_search.close()
+        self.rep_search = AppGetValue(self.data,self,"N° du spectacle associé avec: ")
+        self.rep_search.show()
     def search(self,x):
         try:
             cursor = self.data.cursor()
             if(x!=""):
-                result = cursor.execute("SELECT * FROM LesSpectacles where nospec LIKE ?;",[x])
+                result = cursor.execute("SELECT * FROM LesRepresentations where nospec LIKE ?;",[x])
             else:
-                result = cursor.execute("SELECT * FROM LesSpectacles;")
+                result = cursor.execute("SELECT * FROM LesRepresentations;")
         except Exception as e:
             self.ui.table.setRowCount(0)
             #display.refreshLabel(self.ui.label_fct_comp_1, "Impossible d'afficher les résultats : " + repr(e))
@@ -52,15 +52,15 @@ class AppEditSpec(QDialog):
         else:
             display.refreshGenericData(self.ui.table, result)
     def ajout(self):
-            if self.spec_ajout is not None:
-                self.spec_ajout.close()
-            self.spec_ajout = AppAddSpec(self.data,self)
-            self.spec_ajout.show()
+            if self.rep_ajout is not None:
+                self.rep_ajout.close()
+            self.rep_ajout = AppAddRep(self.data,self)
+            self.rep_ajout.show()
     def modify(self):
-            if self.spec_modif is not None:
-                self.spec_modif.close()
-            self.spec_modif = AppModifSpec(self.data,self,self.ui.table.selectedItems()[0].text())
-            self.spec_modif.show()
+            if self.rep_modif is not None:
+                self.rep_modif.close()
+            self.rep_modif = AppModifSpec(self.data,self,self.ui.table.selectedItems()[0].text())
+            self.rep_modif.show()
 
     def delete(self):
         self.selected_row = self.ui.table.selectedItems()
