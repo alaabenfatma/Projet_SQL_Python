@@ -30,7 +30,7 @@ class AppResEdit(QDialog):
         try:
             cursor = self.data.cursor()
             # TODO 1.1 : mettre à jour la requête et changer aussi le fichier ui correspondant
-            result = cursor.execute("SELECT * FROM LesTickets;")
+            result = cursor.execute("SELECT noSpec, dateRep, noPlace, noRang, dateEmTick, libelleCat, noDos FROM LesTickets;")
         except Exception as e:
             self.ui.table.setRowCount(0)
             #display.refreshLabel(self.ui.label_fct_comp_1, "Impossible d'afficher les résultats : " + repr(e))
