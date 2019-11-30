@@ -55,3 +55,24 @@ class AppResAjout(QDialog):
         index3 = self.ui.comboBox_3.currentIndex()
         for row in self.cursor.execute('SELECT noRang FROM LesPlaces EXCEPT SELECT noRang FROM LesTickets NATURAL JOIN LesSpectacles WHERE nomSpec LIKE ? AND noPlace = ? AND dateRep = ? ', [self.ui.combo_sql_spec.itemText(index), self.ui.comboBox_3.itemText(index3), self.ui.combo_sql_rep.itemText(index2)]):
             self.ui.comboBox_4.addItem(str(row[0]))
+    
+    @pyqtSlot()
+    def createTicket(self):
+        noDos = self.ui.spinBox.text().strip()
+        noSpec = self.ui.combo_sql_spec.currentText()
+        dateRep = self.ui.combo_sql_rep.currentText()
+        catZone = self.ui.comboBox.currentText()
+        catPers = self.ui.comboBox_2.currentText()
+        noPlace = self.ui.comboBox_3.currentText()
+        noRang = self.ui.comboBox_4.currentText()
+        print(noDos)
+        print(noSpec)
+        print(dateRep)
+        print(catZone)
+        print(catPers)
+        print(noPlace)
+        print(noRang)
+        result = self.cursor.execute(
+                    "insert into LesTickets(noSpec, dateRep, noPlace, noRang, libelleCat, dateEmTick, noDos) values ((SELECT noSpec FROM LesSpectacles WHERE nomSpec LIKE ?), ?, ?, ?, ?, DATE(), ?)",
+                    [noSpec,dateRep,noPlace,noRang,catPers,noDos])
+        self.data.commit()
