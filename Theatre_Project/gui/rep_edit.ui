@@ -1,28 +1,70 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>fct_comp_1</class>
- <widget class="QDialog" name="fct_comp_1">
+ <class>spec_form</class>
+ <widget class="QDialog" name="spec_form">
   <property name="geometry">
    <rect>
     <x>0</x>
     <y>0</y>
     <width>495</width>
-    <height>424</height>
+    <height>407</height>
    </rect>
   </property>
   <property name="windowTitle">
-   <string>Modifier les répresentations</string>
+   <string>Modifier les spectacles</string>
   </property>
   <layout class="QVBoxLayout" name="verticalLayout">
    <item>
     <widget class="QLabel" name="label">
      <property name="text">
-      <string>Representations actuelles :</string>
+      <string>Spectacles actuels :</string>
      </property>
     </widget>
    </item>
    <item>
-    <widget class="QTableView" name="t_data"/>
+    <widget class="QTableWidget" name="table">
+     <property name="selectionBehavior">
+      <enum>QAbstractItemView::SelectRows</enum>
+     </property>
+     <attribute name="horizontalHeaderMinimumSectionSize">
+      <number>50</number>
+     </attribute>
+     <attribute name="horizontalHeaderDefaultSectionSize">
+      <number>110</number>
+     </attribute>
+     <attribute name="horizontalHeaderStretchLastSection">
+      <bool>true</bool>
+     </attribute>
+     <attribute name="verticalHeaderVisible">
+      <bool>false</bool>
+     </attribute>
+     <column>
+      <property name="text">
+       <string>noSpec</string>
+      </property>
+     </column>
+     <column>
+      <property name="text">
+       <string>nomSpec</string>
+      </property>
+     </column>
+     <column>
+      <property name="text">
+       <string>prixBaseSpec</string>
+      </property>
+     </column>
+    </widget>
+   </item>
+   <item>
+    <widget class="QPushButton" name="pushButton">
+     <property name="text">
+      <string>Recherche</string>
+     </property>
+     <property name="icon">
+      <iconset>
+       <normaloff>recherche.png</normaloff>recherche.png</iconset>
+     </property>
+    </widget>
    </item>
    <item>
     <widget class="QPushButton" name="add_btn">
@@ -30,7 +72,7 @@
       <bool>false</bool>
      </property>
      <property name="text">
-      <string>Ajout</string>
+      <string>Ajout d'un nouveau spectacle</string>
      </property>
      <property name="icon">
       <iconset>
@@ -41,7 +83,7 @@
    <item>
     <widget class="QPushButton" name="btn_edit">
      <property name="text">
-      <string>Modifier</string>
+      <string>Modifier le spectacle selectionné</string>
      </property>
      <property name="icon">
       <iconset>
@@ -52,7 +94,7 @@
    <item>
     <widget class="QPushButton" name="btn_del">
      <property name="text">
-      <string>Supprimer</string>
+      <string>Supprimer le spectacle selectionné</string>
      </property>
      <property name="icon">
       <iconset>
@@ -60,8 +102,86 @@
      </property>
     </widget>
    </item>
+   <item>
+    <widget class="QLabel" name="status">
+     <property name="text">
+      <string/>
+     </property>
+    </widget>
+   </item>
   </layout>
  </widget>
  <resources/>
- <connections/>
+ <connections>
+  <connection>
+   <sender>add_btn</sender>
+   <signal>clicked()</signal>
+   <receiver>spec_form</receiver>
+   <slot>ajout()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>256</x>
+     <y>318</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>247</x>
+     <y>211</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>btn_del</sender>
+   <signal>clicked()</signal>
+   <receiver>spec_form</receiver>
+   <slot>delete()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>256</x>
+     <y>378</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>247</x>
+     <y>211</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>btn_edit</sender>
+   <signal>clicked()</signal>
+   <receiver>spec_form</receiver>
+   <slot>modify()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>247</x>
+     <y>332</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>247</x>
+     <y>203</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>pushButton</sender>
+   <signal>clicked()</signal>
+   <receiver>spec_form</receiver>
+   <slot>open_search()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>45</x>
+     <y>274</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>16</x>
+     <y>402</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
+ <slots>
+  <slot>ajout()</slot>
+  <slot>delete()</slot>
+  <slot>modify()</slot>
+  <slot>open_search()</slot>
+ </slots>
 </ui>

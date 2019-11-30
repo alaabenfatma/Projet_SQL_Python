@@ -94,7 +94,7 @@
    <sender>pushButton</sender>
    <signal>clicked()</signal>
    <receiver>add_spec</receiver>
-   <slot>ajout()</slot>
+   <slot>update()</slot>
    <hints>
     <hint type="sourcelabel">
      <x>299</x>
@@ -108,6 +108,6 @@
   </connection>
  </connections>
  <slots>
-  <slot>ajout()</slot>
+  <slot>update()</slot>
  </slots>
 </ui>

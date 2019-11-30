@@ -104,8 +104,6 @@ class AppEditSpec(QDialog):
                             pass
                         else:
                             display.refreshLabel(self.ui.status,"Le spectacle {0} a été supprimé.".format(self.no_spec))
-                            self.refreshResult()
-                            self.data.commit()
                             pass
             except Exception as e:
                 display.refreshLabel(self.ui.status,"Erreur de supression : "+repr(e))
