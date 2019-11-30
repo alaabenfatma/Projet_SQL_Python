@@ -14,7 +14,6 @@ from actions.action_fct_comp_3 import AppFctComp3
 from actions.action_fct_comp_4 import AppFctComp4
 from actions.action_rep_libre_2_1 import AppRepLibre
 from actions.action_spectacle import AppSpectacle
-from actions.action_main_spec_rep import AppMainSpecRep
 from actions.action_edit_spec import AppEditSpec
 from actions.action_edit_rep import AppEditRep
 from actions.action_res_edit import AppResEdit

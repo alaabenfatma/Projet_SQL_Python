@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>delete_form</class>
- <widget class="QDialog" name="delete_form">
+ <class>spec_form</class>
+ <widget class="QDialog" name="spec_form">
   <property name="geometry">
    <rect>
     <x>0</x>
@@ -26,11 +26,11 @@
      <property name="selectionBehavior">
       <enum>QAbstractItemView::SelectRows</enum>
      </property>
-     <attribute name="horizontalHeaderDefaultSectionSize">
-      <number>110</number>
-     </attribute>
      <attribute name="horizontalHeaderMinimumSectionSize">
       <number>50</number>
+     </attribute>
+     <attribute name="horizontalHeaderDefaultSectionSize">
+      <number>110</number>
      </attribute>
      <attribute name="horizontalHeaderStretchLastSection">
       <bool>true</bool>
@@ -53,6 +53,17 @@
        <string>prixBaseSpec</string>
       </property>
      </column>
+    </widget>
+   </item>
+   <item>
+    <widget class="QPushButton" name="pushButton">
+     <property name="text">
+      <string>Recherche</string>
+     </property>
+     <property name="icon">
+      <iconset>
+       <normaloff>recherche.png</normaloff>recherche.png</iconset>
+     </property>
     </widget>
    </item>
    <item>
@@ -105,12 +116,12 @@
   <connection>
    <sender>add_btn</sender>
    <signal>clicked()</signal>
-   <receiver>delete_form</receiver>
+   <receiver>spec_form</receiver>
    <slot>ajout()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>247</x>
-     <y>340</y>
+     <x>256</x>
+     <y>318</y>
     </hint>
     <hint type="destinationlabel">
      <x>247</x>
@@ -121,12 +132,12 @@
   <connection>
    <sender>btn_del</sender>
    <signal>clicked()</signal>
-   <receiver>delete_form</receiver>
+   <receiver>spec_form</receiver>
    <slot>delete()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>247</x>
-     <y>402</y>
+     <x>256</x>
+     <y>378</y>
     </hint>
     <hint type="destinationlabel">
      <x>247</x>
@@ -137,7 +148,7 @@
   <connection>
    <sender>btn_edit</sender>
    <signal>clicked()</signal>
-   <receiver>delete_form</receiver>
+   <receiver>spec_form</receiver>
    <slot>modify()</slot>
    <hints>
     <hint type="sourcelabel">
@@ -150,10 +161,27 @@
     </hint>
    </hints>
   </connection>
+  <connection>
+   <sender>pushButton</sender>
+   <signal>clicked()</signal>
+   <receiver>spec_form</receiver>
+   <slot>open_search()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>45</x>
+     <y>274</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>16</x>
+     <y>402</y>
+    </hint>
+   </hints>
+  </connection>
  </connections>
  <slots>
   <slot>ajout()</slot>
   <slot>delete()</slot>
   <slot>modify()</slot>
+  <slot>open_search()</slot>
  </slots>
 </ui>
