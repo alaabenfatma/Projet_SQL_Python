@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>600</width>
-    <height>328</height>
+    <height>329</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -165,8 +165,41 @@
     </hint>
    </hints>
   </connection>
+  <connection>
+   <sender>comboBox_3</sender>
+   <signal>activated(int)</signal>
+   <receiver>table</receiver>
+   <slot>refreshResult2()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>318</x>
+     <y>214</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>298</x>
+     <y>214</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>comboBox_3</sender>
+   <signal>activated(QString)</signal>
+   <receiver>table</receiver>
+   <slot>refreshResult2()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>423</x>
+     <y>210</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>298</x>
+     <y>210</y>
+    </hint>
+   </hints>
+  </connection>
  </connections>
  <slots>
   <slot>refreshResult()</slot>
+  <slot>refreshResult2()</slot>
  </slots>
 </ui>
