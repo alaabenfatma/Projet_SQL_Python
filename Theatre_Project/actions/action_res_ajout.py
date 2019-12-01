@@ -15,6 +15,7 @@ class AppResAjout(QDialog):
         self.data = data
         self.cursor = self.data.cursor()
         self.refreshResult()
+        #On remplit le formulaire d'ajout
         for row in self.cursor.execute("SELECT count(*) FROM LesDossiers"):
             self.ui.spinBox.setMaximum(row[0])
         for row in self.cursor.execute('SELECT nomSpec FROM LesSpectacles'):
@@ -50,6 +51,7 @@ class AppResAjout(QDialog):
     
     @pyqtSlot()
     def refreshResult2(self):
+        #Mise a jour de l'affichage lorsque l'on modifie le formulaire
         self.ui.comboBox_4.clear()
         index = self.ui.combo_sql_spec.currentIndex()
         index2 = self.ui.combo_sql_rep.currentIndex()

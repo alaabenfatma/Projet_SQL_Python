@@ -15,6 +15,7 @@ class AppResModif(QDialog):
         self.data = data
         self.cursor = self.data.cursor()
         self.refreshResult()
+        #Mise a jour du formulaire
         for row in self.cursor.execute("SELECT max(nodos) FROM LesDossiers"):
             self.ui.spinBox.setMaximum(row[0])
         for row in self.cursor.execute('SELECT nomSpec FROM LesSpectacles'):
