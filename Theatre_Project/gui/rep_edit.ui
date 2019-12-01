@@ -94,7 +94,7 @@
    <item>
     <widget class="QPushButton" name="btn_del">
      <property name="text">
-      <string>Supprimer la spectacle selectionné</string>
+      <string>Supprimer la représentation selectionné</string>
      </property>
      <property name="icon">
       <iconset>

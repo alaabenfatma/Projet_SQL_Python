@@ -5,7 +5,7 @@ from PyQt5.QtCore import pyqtSlot
 from PyQt5 import uic
 from PyQt5.QtWidgets import QMessageBox
 from actions.action_add_rep import AppAddRep
-from actions.action_modify_spec import AppModifSpec
+from actions.action_modify_rep import AppModifRep
 from actions.action_get_value import AppGetValue
 # Classe permettant d'afficher la fonction à compléter 1
 class AppEditRep(QDialog):
@@ -59,7 +59,8 @@ class AppEditRep(QDialog):
     def modify(self):
             if self.rep_modif is not None:
                 self.rep_modif.close()
-            self.rep_modif = AppModifSpec(self.data,self,self.ui.table.selectedItems()[0].text())
+            self.rep_modif = AppModifRep(self.data,self,self.ui.table.selectedItems()[0].text(),
+                self.ui.table.selectedItems()[1].text(),self.ui.table.selectedItems()[2].text())
             self.rep_modif.show()
 
     def delete(self):

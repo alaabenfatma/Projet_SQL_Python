@@ -17,7 +17,7 @@
    <item>
     <widget class="QLabel" name="label">
      <property name="text">
-      <string>Créer un nouveau spectacle</string>
+      <string>Modifier la représentation</string>
      </property>
      <property name="alignment">
       <set>Qt::AlignCenter</set>
@@ -32,7 +32,7 @@
      <item>
       <widget class="QLabel" name="label_8">
        <property name="text">
-        <string>Saisissez N° du spectacle :</string>
+        <string>Saisissez N° du spectacle associé :</string>
        </property>
       </widget>
      </item>
@@ -46,12 +46,23 @@
      <item>
       <widget class="QLabel" name="label_2">
        <property name="text">
-        <string>Saisissez un nom du spectacle :</string>
+        <string>Saisissez le date de la rep :</string>
        </property>
       </widget>
      </item>
      <item>
-      <widget class="QLineEdit" name="nom"/>
+      <widget class="QDateTimeEdit" name="date">
+       <property name="dateTime">
+        <datetime>
+         <hour>0</hour>
+         <minute>0</minute>
+         <second>0</second>
+         <year>2019</year>
+         <month>1</month>
+         <day>1</day>
+        </datetime>
+       </property>
+      </widget>
      </item>
     </layout>
    </item>
@@ -60,19 +71,19 @@
      <item>
       <widget class="QLabel" name="label_3">
        <property name="text">
-        <string>Saisissez le prix du spectacle :</string>
+        <string>Saisissez la promo de la rep :</string>
        </property>
       </widget>
      </item>
      <item>
-      <widget class="QDoubleSpinBox" name="prix"/>
+      <widget class="QDoubleSpinBox" name="promo"/>
      </item>
     </layout>
    </item>
    <item>
     <widget class="QPushButton" name="pushButton">
      <property name="text">
-      <string>Créer le spectacle</string>
+      <string>Modifier la représentation</string>
      </property>
     </widget>
    </item>
@@ -97,8 +108,8 @@
    <slot>update()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>299</x>
-     <y>190</y>
+     <x>308</x>
+     <y>185</y>
     </hint>
     <hint type="destinationlabel">
      <x>299</x>
