@@ -60,11 +60,13 @@ class AppResEdit(QDialog):
         else:
             display.refreshGenericData(self.ui.table, result)
     def modify(self):
+        #N'oubliez pas de selectionner une ligne avant de cliquer sur modifier.
         if self.res_modify_dialog is not None:
             self.res_modify_dialog.close()
         self.res_modify_dialog = AppResModif(self.data,self,self.ui.table.selectedItems())
         self.res_modify_dialog.show()
     def delete(self):
+        #N'oubliez pas de selectionner une ligne avant de cliquer sur supprimer.
         display.refreshLabel(self.ui.status,"")
         self.selected_row = self.ui.table.selectedItems()
         msg =  QMessageBox()

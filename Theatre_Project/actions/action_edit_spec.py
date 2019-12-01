@@ -57,12 +57,14 @@ class AppEditSpec(QDialog):
             self.spec_ajout = AppAddSpec(self.data,self)
             self.spec_ajout.show()
     def modify(self):
+        #N'oubliez pas de selectionner une ligne avant de cliquer sur modifier.
             if self.spec_modif is not None:
                 self.spec_modif.close()
             self.spec_modif = AppModifSpec(self.data,self,self.ui.table.selectedItems()[0].text())
             self.spec_modif.show()
 
     def delete(self):
+        #N'oubliez pas de selectionner une ligne avant de cliquer sur supprimer.
         if(len(self.ui.table.selectedItems)==0):
             display.refreshLabel(self.ui.status,"Il faut selectionner au moins une ligne : "+repr(e))
             return

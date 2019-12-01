@@ -23,8 +23,7 @@ class AppResAjout(QDialog):
         for row in self.cursor.execute('SELECT dateRep FROM LesRepresentations NATURAL JOIN LesSpectacles WHERE nomSpec LIKE ?',[self.ui.combo_sql_spec.itemText(index)]):
             self.ui.combo_sql_rep.addItem(row[0])
         index2 = self.ui.combo_sql_rep.currentIndex()
-        for row in self.cursor.execute('SELECT catZone FROM LesZones'):
-            self.ui.comboBox.addItem(row[0])
+        
         for row in self.cursor.execute('SELECT libelleCat FROM LesCategoriesTickets'):
             self.ui.comboBox_2.addItem(row[0])
         for row in self.cursor.execute('SELECT DISTINCT noPlace FROM LesPlaces'):
@@ -66,7 +65,6 @@ class AppResAjout(QDialog):
             noDos = self.ui.spinBox.text().strip()
             noSpec = self.ui.combo_sql_spec.currentText()
             dateRep = self.ui.combo_sql_rep.currentText()
-            catZone = self.ui.comboBox.currentText()
             catPers = self.ui.comboBox_2.currentText()
             noPlace = self.ui.comboBox_3.currentText()
             noRang = self.ui.comboBox_4.currentText()

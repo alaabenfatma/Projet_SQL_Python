@@ -56,6 +56,7 @@ class AppEditRep(QDialog):
             self.rep_ajout = AppAddRep(self.data,self)
             self.rep_ajout.show()
     def modify(self):
+        #N'oubliez pas de selectionner une ligne avant de cliquer sur modifier.
             if self.rep_modif is not None:
                 self.rep_modif.close()
             self.rep_modif = AppModifRep(self.data,self,self.ui.table.selectedItems()[0].text(),
@@ -63,6 +64,7 @@ class AppEditRep(QDialog):
             self.rep_modif.show()
 
     def delete(self):
+        #N'oubliez pas de selectionner une ligne avant de cliquer sur supprimer.
         try:
             self.selected_row = self.ui.table.selectedItems()
         except Exception as e:
