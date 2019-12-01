@@ -5,7 +5,7 @@ from PyQt5.QtWidgets import QDialog
 from PyQt5.QtCore import pyqtSlot
 from PyQt5 import uic
 from actions.action_res_ajout import AppResAjout
-
+from actions.action_get_value import AppGetValue
 # Classe permettant d'afficher la fonction à compléter 1
 class AppResEdit(QDialog):
 
@@ -16,6 +16,7 @@ class AppResEdit(QDialog):
         self.ui = uic.loadUi("gui/res_edit.ui", self)
         self.data = data
         self.refreshResult()
+        self.tick_search = None
 
     def open_res_ajout(self):
         if self.res_ajout_dialog is not None:
@@ -31,6 +32,25 @@ class AppResEdit(QDialog):
             cursor = self.data.cursor()
             # TODO 1.1 : mettre à jour la requête et changer aussi le fichier ui correspondant
             result = cursor.execute("SELECT noSpec, dateRep, noPlace, noRang, dateEmTick, libelleCat, noDos FROM LesTickets;")
+        except Exception as e:
+            self.ui.table.setRowCount(0)
+            #display.refreshLabel(self.ui.label_fct_comp_1, "Impossible d'afficher les résultats : " + repr(e))
+            print("Impossible d'afficher les résultats : " + repr(e))
+        else:
+            display.refreshGenericData(self.ui.table, result)
+    def open_search(self,parent):
+        if self.tick_search is not None:
+                self.tick_search.close()
+        self.tick_search = AppGetValue(self.data,self,"Date d'emision du ticket : ")
+        self.tick_search.show()
+    def search(self,x):
+        try:
+            x= x+"%"
+            cursor = self.data.cursor()
+            if(x!=""):
+                result = cursor.execute("SELECT noSpec, dateRep, noPlace, noRang, dateEmTick, libelleCat, noDos FROM LesTickets where dateEmTick LIKE ?",[x])
+            else:
+                result = cursor.execute("SELECT noSpec, dateRep, noPlace, noRang, dateEmTick, libelleCat, noDos FROM LesTickets;")
         except Exception as e:
             self.ui.table.setRowCount(0)
             #display.refreshLabel(self.ui.label_fct_comp_1, "Impossible d'afficher les résultats : " + repr(e))
