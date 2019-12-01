@@ -72,46 +72,42 @@ class AppEditRep(QDialog):
         msg.addButton(QMessageBox.No)
         msg.setDefaultButton(QMessageBox.No)
         c =  self.data.cursor()
-        req = "select count(*) from lestickets where nospec = ?"
-        res = c.execute(req,[self.selected_row[0].text()])
-        self.no_spec = self.selected_row[0].text()
-        self.no_spec = int(self.no_spec)
+        req = "select count(*) from lestickets where nospec = ? and daterep=?"
+        res = c.execute(req,[self.selected_row[0].text(),self.selected_row[1].text()])
+        self.no_spec = int(self.selected_row[0].text())
+        self.date_rep =self.selected_row[1].text()
         print(self.no_spec)
         self.num_of_tickets = list(res)[0][0]
         if(msg.exec() == QMessageBox.Yes):
             try:
-                result = c.execute(
-                    "DELETE FROM LesSpectacles WHERE noSpec = ?",
-                    [self.no_spec])
+                result = c.execute("DELETE FROM LesRepresentations_base WHERE noSpec = ? and daterep =?",
+                                [self.no_spec, self.date_rep])
                 print(self.num_of_tickets)
                 if(self.num_of_tickets>0):
                     msg1 =  QMessageBox()
                     msg1.setWindowTitle("Suppression")
-                    msg1.setText("Voulez-vous supprimer également les representations et les places associées a ce spectacle?")
+                    msg1.setText("Voulez-vous supprimer également les places associées a cette representation?")
                     msg1.setStandardButtons(QMessageBox.Yes)
                     msg1.addButton(QMessageBox.No)
                     msg1.setDefaultButton(QMessageBox.No)
                     if(msg1.exec() == QMessageBox.Yes):
                         try:
                             result = c.execute(
-                                "DELETE FROM LesRepresentations_base WHERE noSpec = ?",
-                                [self.no_spec])
-                            result = c.execute(
-                                "DELETE FROM Lestickets WHERE noSpec = ?",
-                                [self.no_spec])
+                                "DELETE FROM Lestickets WHERE noSpec = ? and daterep=?",
+                                [self.no_spec, self.date_rep])
                         except Exception as e:
                             display.refreshLabel(self.ui.status,"Erreur de supression : "+repr(e))
                             print(repr(e))
                             pass
                         else:
-                            display.refreshLabel(self.ui.status,"Le spectacle {0} a été supprimé.".format(self.no_spec))
+                            display.refreshLabel(self.ui.status,"La representation associée au spectacle {0} a été supprimé.".format(self.no_spec))
                             pass
             except Exception as e:
                 display.refreshLabel(self.ui.status,"Erreur de supression : "+repr(e))
                 print(repr(e))
                 pass
             else:
-                display.refreshLabel(self.ui.status,"Le spectacle {0} a été supprimé.".format(self.no_spec))
+                display.refreshLabel(self.ui.status,"La representation  a été supprimé.")
                 self.refreshResult()
                 self.data.commit()
                 pass
