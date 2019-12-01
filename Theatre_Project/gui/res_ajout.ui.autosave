@@ -1,0 +1,286 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>table</class>
+ <widget class="QDialog" name="table">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>600</width>
+    <height>329</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Créer un nouveau ticket</string>
+  </property>
+  <layout class="QVBoxLayout" name="verticalLayout">
+   <item>
+    <widget class="QLabel" name="label">
+     <property name="text">
+      <string>Créer un nouveau ticket</string>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignCenter</set>
+     </property>
+     <property name="wordWrap">
+      <bool>true</bool>
+     </property>
+    </widget>
+   </item>
+   <item>
+    <layout class="QHBoxLayout" name="horizontalLayout_7">
+     <item>
+      <widget class="QLabel" name="label_8">
+       <property name="text">
+        <string>noDossier? (Si 0, un nouveau sera créer)</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QSpinBox" name="spinBox"/>
+     </item>
+    </layout>
+   </item>
+   <item>
+    <layout class="QHBoxLayout" name="horizontalLayout">
+     <item>
+      <widget class="QLabel" name="label_2">
+       <property name="text">
+        <string>Saisissez un spectacle :</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QComboBox" name="combo_sql_spec"/>
+     </item>
+    </layout>
+   </item>
+   <item>
+    <layout class="QHBoxLayout" name="horizontalLayout_2">
+     <item>
+      <widget class="QLabel" name="label_3">
+       <property name="text">
+        <string>Saisissez une representation :</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QComboBox" name="combo_sql_rep"/>
+     </item>
+    </layout>
+   </item>
+   <item>
+    <layout class="QHBoxLayout" name="horizontalLayout_3">
+     <item>
+      <widget class="QLabel" name="label_4">
+       <property name="text">
+        <string>Saisissez une catégorie de zone:</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QComboBox" name="comboBox"/>
+     </item>
+    </layout>
+   </item>
+   <item>
+    <layout class="QHBoxLayout" name="horizontalLayout_4">
+     <item>
+      <widget class="QLabel" name="label_5">
+       <property name="text">
+        <string>Saisissez une catégorie de personne:</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QComboBox" name="comboBox_2"/>
+     </item>
+    </layout>
+   </item>
+   <item>
+    <layout class="QHBoxLayout" name="horizontalLayout_5">
+     <item>
+      <widget class="QLabel" name="label_6">
+       <property name="text">
+        <string>Saisissez noPlace:</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QComboBox" name="comboBox_3"/>
+     </item>
+    </layout>
+   </item>
+   <item>
+    <layout class="QHBoxLayout" name="horizontalLayout_6">
+     <item>
+      <widget class="QLabel" name="label_7">
+       <property name="text">
+        <string>Saisissez noRang:</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QComboBox" name="comboBox_4"/>
+     </item>
+    </layout>
+   </item>
+   <item>
+    <layout class="QHBoxLayout" name="horizontalLayout_9"/>
+   </item>
+   <item>
+    <widget class="QPushButton" name="pushButton">
+     <property name="text">
+      <string>Créer un ticket</string>
+     </property>
+    </widget>
+   </item>
+   <item>
+    <widget class="QLabel" name="status">
+     <property name="text">
+      <string/>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignCenter</set>
+     </property>
+    </widget>
+   </item>
+  </layout>
+ </widget>
+ <resources/>
+ <connections>
+  <connection>
+   <sender>combo_sql_spec</sender>
+   <signal>activated(QString)</signal>
+   <receiver>table</receiver>
+   <slot>refreshResult()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>392</x>
+     <y>81</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>297</x>
+     <y>79</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>comboBox_3</sender>
+   <signal>activated(int)</signal>
+   <receiver>table</receiver>
+   <slot>refreshResult2()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>318</x>
+     <y>214</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>298</x>
+     <y>214</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>comboBox_3</sender>
+   <signal>activated(QString)</signal>
+   <receiver>table</receiver>
+   <slot>refreshResult2()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>423</x>
+     <y>210</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>298</x>
+     <y>210</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>combo_sql_spec</sender>
+   <signal>activated(QString)</signal>
+   <receiver>table</receiver>
+   <slot>refreshResult2()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>442</x>
+     <y>76</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>579</x>
+     <y>94</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>combo_sql_rep</sender>
+   <signal>activated(QString)</signal>
+   <receiver>table</receiver>
+   <slot>refreshResult2()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>315</x>
+     <y>115</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>298</x>
+     <y>115</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>pushButton</sender>
+   <signal>clicked()</signal>
+   <receiver>table</receiver>
+   <slot>createTicket()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>266</x>
+     <y>285</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>273</x>
+     <y>297</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>pushButton</sender>
+   <signal>clicked()</signal>
+   <receiver>table</receiver>
+   <slot>refreshResult()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>251</x>
+     <y>288</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>249</x>
+     <y>300</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>pushButton</sender>
+   <signal>clicked()</signal>
+   <receiver>table</receiver>
+   <slot>refreshResult2()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>122</x>
+     <y>288</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>133</x>
+     <y>301</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
+ <slots>
+  <slot>refreshResult()</slot>
+  <slot>refreshResult2()</slot>
+  <slot>createTicket()</slot>
+ </slots>
+</ui>

@@ -1,4 +1,5 @@
 import sqlite3
+import datetime
 from utils import display
 from PyQt5.QtWidgets import QDialog
 from PyQt5.QtCore import pyqtSlot
@@ -58,26 +59,32 @@ class AppResAjout(QDialog):
     
     @pyqtSlot()
     def createTicket(self):
-        noDos = self.ui.spinBox.text().strip()
-        noSpec = self.ui.combo_sql_spec.currentText()
-        dateRep = self.ui.combo_sql_rep.currentText()
-        catZone = self.ui.comboBox.currentText()
-        catPers = self.ui.comboBox_2.currentText()
-        noPlace = self.ui.comboBox_3.currentText()
-        noRang = self.ui.comboBox_4.currentText()
-        for row in self.cursor.execute("SELECT count(*) FROM LesTickets WHERE noDos = ?", [noDos]):
-            exists = row[0]
-        if(exists == 0):
-            for row in self.cursor.execute("SELECT count(*) FROM LesDossiers"):
-                max_dos = row[0]
-            insert_max_dos = self.cursor.execute("insert into LesDossiers_base(noDos) values (?)",[max_dos + 1]);
-            max_dos = max_dos + 1
-            result = self.cursor.execute(
-                        "insert into LesTickets(noSpec, dateRep, noPlace, noRang, libelleCat, dateEmTick, noDos) values ((SELECT noSpec FROM LesSpectacles WHERE nomSpec LIKE ?), ?, ?, ?, ?, DATE(), ?)",
-                        [noSpec,dateRep,noPlace,noRang,catPers, max_dos])
-            self.data.commit()
+        try:
+            now = datetime.datetime.now()
+            noDos = self.ui.spinBox.text().strip()
+            noSpec = self.ui.combo_sql_spec.currentText()
+            dateRep = self.ui.combo_sql_rep.currentText()
+            catZone = self.ui.comboBox.currentText()
+            catPers = self.ui.comboBox_2.currentText()
+            noPlace = self.ui.comboBox_3.currentText()
+            noRang = self.ui.comboBox_4.currentText()
+            now_date = now.strftime("%d/%m/%Y %H:%M")
+            for row in self.cursor.execute("SELECT count(*) FROM LesTickets WHERE noDos = ?", [noDos]):
+                exists = row[0]
+            if(exists == 0):
+                for row in self.cursor.execute("SELECT count(*) FROM LesDossiers"):
+                    max_dos = row[0]
+                insert_max_dos = self.cursor.execute("insert into LesDossiers_base(noDos) values (?)",[max_dos + 1])
+                max_dos = max_dos + 1
+                result = self.cursor.execute(
+                            "insert into LesTickets(noSpec, dateRep, noPlace, noRang, libelleCat, dateEmTick, noDos) values ((SELECT noSpec FROM LesSpectacles WHERE nomSpec LIKE ?), ?, ?, ?, ?, ?, ?)",
+                            [noSpec,dateRep,noPlace,noRang,catPers,now_date, max_dos])
+            else:
+                result = self.cursor.execute(
+                            "insert into LesTickets(noSpec, dateRep, noPlace, noRang, libelleCat, dateEmTick, noDos) values ((SELECT noSpec FROM LesSpectacles WHERE nomSpec LIKE ?), ?, ?, ?, ?, ?, ?)",
+                            [noSpec,dateRep,noPlace,noRang,catPers,now_date,noDos])
+        except Exception as e:
+            display.refreshLabel(self.ui.status,"Erreur : "+ repr(e))
         else:
-            result = self.cursor.execute(
-                        "insert into LesTickets(noSpec, dateRep, noPlace, noRang, libelleCat, dateEmTick, noDos) values ((SELECT noSpec FROM LesSpectacles WHERE nomSpec LIKE ?), ?, ?, ?, ?, DATE(), ?)",
-                        [noSpec,dateRep,noPlace,noRang,catPers,noDos])
             self.data.commit()
+        
