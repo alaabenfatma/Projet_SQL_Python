@@ -1,7 +1,7 @@
 
 import sqlite3
 from utils import display
-from PyQt5.QtWidgets import QDialog
+from PyQt5.QtWidgets import QDialog, QMessageBox
 from PyQt5.QtCore import pyqtSlot
 from PyQt5 import uic
 from actions.action_res_ajout import AppResAjout
@@ -21,13 +21,13 @@ class AppResEdit(QDialog):
     def open_res_ajout(self):
         if self.res_ajout_dialog is not None:
             self.res_ajout_dialog.close()
-        self.res_ajout_dialog = AppResAjout(self.data)
+        self.res_ajout_dialog = AppResAjout(self.data,self)
         self.res_ajout_dialog.show()
 
     # Fonction de mise à jour de l'affichage
     @pyqtSlot()
     def refreshResult(self):
-        #display.refreshLabel(self.ui.label_fct_comp_1, "")
+        display.refreshLabel(self.ui.status, "")
         try:
             cursor = self.data.cursor()
             # TODO 1.1 : mettre à jour la requête et changer aussi le fichier ui correspondant
@@ -60,3 +60,30 @@ class AppResEdit(QDialog):
     def ajout(self):
             self.selected_row = self.ui.table.selectedItems()
             print(self.selected_row[0].text())
+    def delete(self):
+        display.refreshLabel(self.ui.status,"")
+        self.selected_row = self.ui.table.selectedItems()
+        msg =  QMessageBox()
+        msg.setWindowTitle("Suppression")
+        msg.setText("Voulez-vous vraiment supprimer ce ticket?")
+        msg.setStandardButtons(QMessageBox.Yes)
+        msg.addButton(QMessageBox.No)
+        msg.setDefaultButton(QMessageBox.No)
+        self.no_spec = self.selected_row[0].text()
+        self.date_rep = self.selected_row[1].text()
+        self.noplace = self.selected_row[2].text()
+        self.norang = self.selected_row[3].text()
+        self.norang = self.selected_row[3].text()
+        if(msg.exec() == QMessageBox.Yes):
+            try:
+                result = self.data.cursor().execute(
+                    "DELETE FROM LesTickets WHERE noSpec = ? and dateRep = ? and noplace = ? and norang = ?",
+                    [self.no_spec,self.date_rep,self.noplace,self.norang])
+            except Exception as e:
+                display.refreshLabel(self.ui.status,"Ereur : "+repr(e))
+                pass
+            else:
+                display.refreshLabel(self.ui.status,"Le ticket a été supprimé.")
+                self.refreshResult()
+                self.data.commit()
+                pass

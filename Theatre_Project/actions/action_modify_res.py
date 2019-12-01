@@ -6,7 +6,7 @@ from PyQt5.QtCore import pyqtSlot
 from PyQt5 import uic
 
 # Classe permettant d'afficher la fonction à compléter 1
-class AppResAjout(QDialog):
+class AppResModif(QDialog):
 
     # Constructeur
     def __init__(self, data:sqlite3.Connection,parent):

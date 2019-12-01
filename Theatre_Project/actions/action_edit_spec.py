@@ -63,6 +63,9 @@ class AppEditSpec(QDialog):
             self.spec_modif.show()
 
     def delete(self):
+        if(len(self.ui.table.selectedItems)==0):
+            display.refreshLabel(self.ui.status,"Il faut selectionner au moins une ligne : "+repr(e))
+            return
         self.selected_row = self.ui.table.selectedItems()
         msg =  QMessageBox()
         msg.setWindowTitle("Suppression")

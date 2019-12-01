@@ -23,7 +23,7 @@ class AppRepLibre(QDialog):
         try:
             cursor = self.data.cursor()
             # TODO 1.1 : mettre à jour la requête et changer aussi le fichier ui correspondant
-            result = cursor.execute("SELECT noSpec, dateRep, promoRep  FROM lesrepresentations")
+            result = cursor.execute("SELECT noSpec, dateRep, promoRep  FROM lesrepresentations where placesdispo = (select count(*) from lesplaces)")
             display.refreshLabel(self.ui.label_fct_comp_1, "")
         except Exception as e:
             self.ui.table_fct_comp_1.setRowCount(0)

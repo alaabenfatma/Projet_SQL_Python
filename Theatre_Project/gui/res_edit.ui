@@ -98,6 +98,9 @@
       <iconset>
        <normaloff>plus.png</normaloff>plus.png</iconset>
      </property>
+     <property name="checkable">
+      <bool>false</bool>
+     </property>
     </widget>
    </item>
    <item>
@@ -122,6 +125,13 @@
      </property>
     </widget>
    </item>
+   <item>
+    <widget class="QLabel" name="status">
+     <property name="text">
+      <string/>
+     </property>
+    </widget>
+   </item>
   </layout>
  </widget>
  <resources/>
@@ -133,8 +143,8 @@
    <slot>open_res_ajout()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>390</x>
-     <y>340</y>
+     <x>399</x>
+     <y>335</y>
     </hint>
     <hint type="destinationlabel">
      <x>390</x>
@@ -149,8 +159,8 @@
    <slot>open_search()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>62</x>
-     <y>312</y>
+     <x>71</x>
+     <y>305</y>
     </hint>
     <hint type="destinationlabel">
      <x>1</x>
@@ -158,9 +168,26 @@
     </hint>
    </hints>
   </connection>
+  <connection>
+   <sender>btn_del</sender>
+   <signal>clicked()</signal>
+   <receiver>fct_comp_1</receiver>
+   <slot>delete()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>223</x>
+     <y>382</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>182</x>
+     <y>397</y>
+    </hint>
+   </hints>
+  </connection>
  </connections>
  <slots>
   <slot>ajout()</slot>
+  <slot>delete()</slot>
   <slot>open_res_ajout()</slot>
   <slot>open_search()</slot>
  </slots>
