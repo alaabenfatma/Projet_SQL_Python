@@ -69,20 +69,24 @@ class AppResAjout(QDialog):
             noPlace = self.ui.comboBox_3.currentText()
             noRang = self.ui.comboBox_4.currentText()
             now_date = now.strftime("%d/%m/%Y %H:%M")
-            for row in self.cursor.execute("SELECT count(*) FROM LesTickets WHERE noDos = ?", [noDos]):
-                exists = row[0]
-            if(exists == 0):
-                for row in self.cursor.execute("SELECT count(*) FROM LesDossiers"):
-                    max_dos = row[0]
-                insert_max_dos = self.cursor.execute("insert into LesDossiers_base(noDos) values (?)",[max_dos + 1])
-                max_dos = max_dos + 1
-                result = self.cursor.execute(
-                            "insert into LesTickets(noSpec, dateRep, noPlace, noRang, libelleCat, dateEmTick, noDos) values ((SELECT noSpec FROM LesSpectacles WHERE nomSpec LIKE ?), ?, ?, ?, ?, ?, ?)",
-                            [noSpec,dateRep,noPlace,noRang,catPers,now_date, max_dos])
+            if(noRang != ""):
+                for row in self.cursor.execute("SELECT count(*) FROM LesTickets WHERE noDos = ?", [noDos]):
+                    exists = row[0]
+                if(exists == 0):
+                    for row in self.cursor.execute("SELECT count(*) FROM LesDossiers"):
+                        max_dos = row[0]
+                    insert_max_dos = self.cursor.execute("insert into LesDossiers_base(noDos) values (?)",[max_dos + 1])
+                    max_dos = max_dos + 1
+                    result = self.cursor.execute(
+                                "insert into LesTickets(noSpec, dateRep, noPlace, noRang, libelleCat, dateEmTick, noDos) values ((SELECT noSpec FROM LesSpectacles WHERE nomSpec LIKE ?), ?, ?, ?, ?, ?, ?)",
+                                [noSpec,dateRep,noPlace,noRang,catPers,now_date, max_dos])
+                else:
+                    result = self.cursor.execute(
+                                "insert into LesTickets(noSpec, dateRep, noPlace, noRang, libelleCat, dateEmTick, noDos) values ((SELECT noSpec FROM LesSpectacles WHERE nomSpec LIKE ?), ?, ?, ?, ?, ?, ?)",
+                                [noSpec,dateRep,noPlace,noRang,catPers,now_date,noDos])
             else:
-                result = self.cursor.execute(
-                            "insert into LesTickets(noSpec, dateRep, noPlace, noRang, libelleCat, dateEmTick, noDos) values ((SELECT noSpec FROM LesSpectacles WHERE nomSpec LIKE ?), ?, ?, ?, ?, ?, ?)",
-                            [noSpec,dateRep,noPlace,noRang,catPers,now_date,noDos])
+                display.refreshLabel(self.ui.status,"Erreur : Le numero de rang est vide")
+
         except Exception as e:
             display.refreshLabel(self.ui.status,"Erreur : "+ repr(e))
         else:
