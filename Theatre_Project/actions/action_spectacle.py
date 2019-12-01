@@ -22,7 +22,7 @@ class AppSpectacle(QDialog):
         display.refreshLabel(self.ui.label_fct_comp_1, "")
         try:
             cursor = self.data.cursor()
-            result = cursor.execute("WITH nbPlaces AS (SELECT * FROM LesPlaces) SELECT noSpec, nomSpec, dateRep, ((SELECT count(*) FROM nbPlaces) - PlacesDispo) AS nbPlacesReserves  FROM LesSpectacles NATURAL JOIN LesRepresentations ORDER BY noSpec;")
+            result = cursor.execute("WITH nbPlaces AS (SELECT * FROM LesPlaces) SELECT noSpec, nomSpec, dateRep, ((SELECT count(*) FROM nbPlaces) - nbPlacesDispoRep) AS nbPlacesReserves  FROM LesSpectacles NATURAL JOIN LesRepresentations ORDER BY noSpec;")
             display.refreshLabel(self.ui.label_fct_comp_1, "")
         except Exception as e:
             self.ui.table_fct_comp_1.setRowCount(0)

@@ -35,7 +35,6 @@ class AppFctComp3(QDialog):
                 result = cursor.execute(
                     "SELECT noPlace, noRang, noZone FROM LesZones NATURAL JOIN LesPlaces WHERE catZone = ?",
                     [self.cat])
-                print(self.cat)
             except Exception as e:
                 self.ui.table_fct_comp_3.setRowCount(0)
                 display.refreshLabel(self.ui.label_fct_comp_3, "Impossible d'afficher les résultats : " + repr(e))

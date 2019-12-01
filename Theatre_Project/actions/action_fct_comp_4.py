@@ -14,8 +14,10 @@ class AppFctComp4(QDialog):
         self.ui = uic.loadUi("gui/fct_comp_4.ui", self)
         self.data = data
         self.cursor = self.data.cursor()
-        for row in self.cursor.execute("SELECT count(*) FROM LesDossiers"):
+        for row in self.cursor.execute("SELECT max(nodos) FROM LesDossiers"):
             self.ui.spinBox_fct_4_dossier.setMaximum(row[0])
+        for row in self.cursor.execute("SELECT min(nodos) FROM LesDossiers"):
+            self.ui.spinBox_fct_4_dossier.setMinimum(row[0])
         self.refreshCatList()
         self.ui.spinBox_fct_4_dossier.valueChanged.connect(self.refreshCatList)
 

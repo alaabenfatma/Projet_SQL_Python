@@ -184,10 +184,27 @@
     </hint>
    </hints>
   </connection>
+  <connection>
+   <sender>btn_edit</sender>
+   <signal>clicked()</signal>
+   <receiver>fct_comp_1</receiver>
+   <slot>modify()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>177</x>
+     <y>361</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>5</x>
+     <y>358</y>
+    </hint>
+   </hints>
+  </connection>
  </connections>
  <slots>
   <slot>ajout()</slot>
   <slot>delete()</slot>
+  <slot>modify()</slot>
   <slot>open_res_ajout()</slot>
   <slot>open_search()</slot>
  </slots>

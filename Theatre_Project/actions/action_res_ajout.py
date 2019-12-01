@@ -77,9 +77,8 @@ class AppResAjout(QDialog):
                 if(exists == 0):
                     res = self.data.cursor().execute("SELECT max(nodos) FROM LesDossiers")
                     max_dos = list(res)[0][0] + 1
-                    print(max_dos)
                     insert_max_dos = self.data.cursor().execute("insert into LesDossiers_base(noDos) values (?)",[max_dos])
-                    
+                    noDos = max_dos
                     result = self.cursor.execute(
                                 "insert into LesTickets(noSpec, dateRep, noPlace, noRang, libelleCat, dateEmTick, noDos) values ((SELECT noSpec FROM LesSpectacles WHERE nomSpec LIKE ?), ?, ?, ?, ?, ?, ?)",
                                 [noSpec,dateRep,noPlace,noRang,catPers,now_date, max_dos])
@@ -96,4 +95,4 @@ class AppResAjout(QDialog):
             display.refreshLabel(self.ui.status,"Le ticket a été créé avec succes.")
             self.data.commit()
             self.parent.refreshResult()
-        
+            self.ui.spinBox.setMaximum(int(noDos))

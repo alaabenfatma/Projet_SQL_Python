@@ -9,13 +9,13 @@ from PyQt5 import uic
 class AppResModif(QDialog):
 
     # Constructeur
-    def __init__(self, data:sqlite3.Connection,parent):
+    def __init__(self, data:sqlite3.Connection,parent,old_data):
         super(QDialog, self).__init__()
-        self.ui = uic.loadUi("gui/res_ajout.ui", self)
+        self.ui = uic.loadUi("gui/res_modif.ui", self)
         self.data = data
         self.cursor = self.data.cursor()
         self.refreshResult()
-        for row in self.cursor.execute("SELECT count(*) FROM LesDossiers"):
+        for row in self.cursor.execute("SELECT max(nodos) FROM LesDossiers"):
             self.ui.spinBox.setMaximum(row[0])
         for row in self.cursor.execute('SELECT nomSpec FROM LesSpectacles'):
             self.ui.combo_sql_spec.addItem(row[0])
@@ -33,6 +33,15 @@ class AppResModif(QDialog):
         for row in self.cursor.execute('SELECT noRang FROM LesPlaces EXCEPT SELECT noRang FROM LesTickets NATURAL JOIN LesSpectacles WHERE nomSpec LIKE ? AND noPlace = ? AND dateRep LIKE ? ', [self.ui.combo_sql_spec.itemText(index), self.ui.comboBox_3.itemText(index3), self.ui.combo_sql_rep.itemText(index2)]):
             self.ui.comboBox_4.addItem(str(row[0]))
         self.parent = parent
+        self.old_nodos = old_data[6].text()
+        print(self.old_nodos)
+        self.old_nospec = old_data[0].text()
+        self.old_daterep = old_data[1].text()
+        self.old_noplace = old_data[2].text()
+        self.old_norang = old_data[3].text()
+        self.old_dateem = old_data[4].text()
+        self.old_lib = old_data[5].text()
+        self.ui.spinBox.setValue(int(self.old_nodos))
     # Fonction de mise à jour de l'affichage
     @pyqtSlot()
     def refreshResult(self):
@@ -61,39 +70,43 @@ class AppResModif(QDialog):
     @pyqtSlot()
     def createTicket(self):
         display.refreshLabel(self.ui.status, "")
+        now = datetime.datetime.now()
+        noDos = self.ui.spinBox.text().strip()
+        noSpec = self.ui.combo_sql_spec.currentText()
+        dateRep = self.ui.combo_sql_rep.currentText()
+        catZone = self.ui.comboBox.currentText()
+        catPers = self.ui.comboBox_2.currentText()
+        noPlace = self.ui.comboBox_3.currentText()
+        noRang = self.ui.comboBox_4.currentText()
         try:
-            now = datetime.datetime.now()
-            noDos = self.ui.spinBox.text().strip()
-            noSpec = self.ui.combo_sql_spec.currentText()
-            dateRep = self.ui.combo_sql_rep.currentText()
-            catZone = self.ui.comboBox.currentText()
-            catPers = self.ui.comboBox_2.currentText()
-            noPlace = self.ui.comboBox_3.currentText()
-            noRang = self.ui.comboBox_4.currentText()
-            now_date = now.strftime("%d/%m/%Y %H:%M")
+          
+            
             if(noRang != ""):
                 for row in self.cursor.execute("SELECT count(*) FROM LesTickets WHERE noDos = ?", [noDos]):
                     exists = row[0]
                 if(exists == 0):
                     res = self.data.cursor().execute("SELECT max(nodos) FROM LesDossiers")
                     max_dos = list(res)[0][0] + 1
-                    print(max_dos)
                     insert_max_dos = self.data.cursor().execute("insert into LesDossiers_base(noDos) values (?)",[max_dos])
-                    
                     result = self.cursor.execute(
-                                "insert into LesTickets(noSpec, dateRep, noPlace, noRang, libelleCat, dateEmTick, noDos) values ((SELECT noSpec FROM LesSpectacles WHERE nomSpec LIKE ?), ?, ?, ?, ?, ?, ?)",
-                                [noSpec,dateRep,noPlace,noRang,catPers,now_date, max_dos])
+                                "update LesTickets set nospec= (SELECT noSpec FROM LesSpectacles WHERE nomSpec LIKE ?), daterep= ?, noplace= ?,norang= ?,libelleCat= ?,nodos= ? where nospec = ?,noplace=?, norang=?",
+                                [noSpec,dateRep,noPlace,noRang,catPers, max_dos,noSpec,noPlace,noRang])
+                    noDos = max_dos
                 else:
                     result = self.cursor.execute(
-                                "insert into LesTickets(noSpec, dateRep, noPlace, noRang, libelleCat, dateEmTick, noDos) values ((SELECT noSpec FROM LesSpectacles WHERE nomSpec LIKE ?), ?, ?, ?, ?, ?, ?)",
-                                [noSpec,dateRep,noPlace,noRang,catPers,now_date,noDos])
+                                "update LesTickets set nospec= (SELECT noSpec FROM LesSpectacles WHERE nomSpec LIKE ?), daterep= ?, noplace= ?,norang= ?,libelleCat= ?,nodos= ? where nospec = ? and noplace=? and norang=?;",
+                                [noSpec,dateRep,noPlace,noRang,catPers, noDos,self.old_nospec,self.old_noplace,self.old_norang])
             else:
                 display.refreshLabel(self.ui.status,"Erreur : Le numero de rang est vide")
                 return
         except Exception as e:
             display.refreshLabel(self.ui.status,"Erreur : "+ repr(e))
         else:
-            display.refreshLabel(self.ui.status,"Le ticket a été créé avec succes.")
+            display.refreshLabel(self.ui.status,"La reservation a été modifiée avec succès.")
             self.data.commit()
             self.parent.refreshResult()
-        
+            self.old_daterep =  dateRep
+            self.old_lib = catPers
+            self.old_nodos = noDos
+            self.old_noplace = noPlace
+            self.old_norang = noRang

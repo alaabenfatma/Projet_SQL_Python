@@ -6,10 +6,11 @@ from PyQt5.QtCore import pyqtSlot
 from PyQt5 import uic
 from actions.action_res_ajout import AppResAjout
 from actions.action_get_value import AppGetValue
+from actions.action_modify_res import AppResModif
 # Classe permettant d'afficher la fonction à compléter 1
 class AppResEdit(QDialog):
 
-    res_ajout_dialog = None
+    
     # Constructeur
     def __init__(self, data:sqlite3.Connection):
         super(QDialog, self).__init__()
@@ -17,7 +18,8 @@ class AppResEdit(QDialog):
         self.data = data
         self.refreshResult()
         self.tick_search = None
-
+        self.res_ajout_dialog = None
+        self.res_modify_dialog = None
     def open_res_ajout(self):
         if self.res_ajout_dialog is not None:
             self.res_ajout_dialog.close()
@@ -57,9 +59,11 @@ class AppResEdit(QDialog):
             print("Impossible d'afficher les résultats : " + repr(e))
         else:
             display.refreshGenericData(self.ui.table, result)
-    def ajout(self):
-            self.selected_row = self.ui.table.selectedItems()
-            print(self.selected_row[0].text())
+    def modify(self):
+        if self.res_modify_dialog is not None:
+            self.res_modify_dialog.close()
+        self.res_modify_dialog = AppResModif(self.data,self,self.ui.table.selectedItems())
+        self.res_modify_dialog.show()
     def delete(self):
         display.refreshLabel(self.ui.status,"")
         self.selected_row = self.ui.table.selectedItems()

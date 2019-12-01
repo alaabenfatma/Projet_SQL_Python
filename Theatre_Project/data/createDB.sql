@@ -79,7 +79,7 @@ CREATE VIEW lesrepresentations AS WITH s1 AS
 SELECT s1.nospec,
        d dateRep,
        promorep,
-       ((SELECT Count(*) n FROM lesplaces) - s1.taken) PlacesDispo
+       ((SELECT Count(*) n FROM lesplaces) - s1.taken) nbPlacesDispoRep
 FROM s1;
 
 -- TODO 1.3 : ajouter la table LesCategoriesTickets
