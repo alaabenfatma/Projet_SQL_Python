@@ -86,9 +86,10 @@ class AppResAjout(QDialog):
                                 [noSpec,dateRep,noPlace,noRang,catPers,now_date,noDos])
             else:
                 display.refreshLabel(self.ui.status,"Erreur : Le numero de rang est vide")
-
+                return
         except Exception as e:
             display.refreshLabel(self.ui.status,"Erreur : "+ repr(e))
         else:
+            display.refreshLabel(self.ui.status,"Le ticket a été créé avec succes.")
             self.data.commit()
         
